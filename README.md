@@ -44,6 +44,6 @@ SCNTSE (Prof. Dr. Satyajit Chakrabarti National Talent Search Examination) is a 
 - `attached_assets/` - Images and assets
 
 ## Getting Started
-1. Clone the repository (when available)
+1. Clone the repository 
 2. Install dependencies: `npm install`
 3. Start development server: `npm run dev`
