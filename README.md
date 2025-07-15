@@ -18,7 +18,7 @@ SCNTSE (Prof. Dr. Satyajit Chakrabarti National Talent Search Examination) is a 
 ### Backend
 - **Runtime:** Node.js
 - **Server:** Express.js (TypeScript, ES modules)
-- **Development:** tsx for TypeScript execution
+- **No database or storage is used.**
 
 ## Key Features
 - **Single-page Application:** Smooth navigation and fast performance
@@ -40,10 +40,10 @@ SCNTSE (Prof. Dr. Satyajit Chakrabarti National Talent Search Examination) is a 
 ## Project Structure
 - `client/` - Frontend source code
 - `server/` - Express backend
-- `shared/` - Shared schema and types
 - `attached_assets/` - Images and assets
 
 ## Getting Started
-1. Clone the repository 
+1. Clone the repository (when available)
 2. Install dependencies: `npm install`
 3. Start development server: `npm run dev`
+
