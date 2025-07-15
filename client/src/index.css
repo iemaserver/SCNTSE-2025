@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(222, 47%, 11%);
+  --foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217, 32%, 17%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --popover: hsl(222, 47%, 11%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 47%, 11%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --border: hsl(217, 32%, 17%);
+  --input: hsl(217, 32%, 17%);
+  --primary: hsl(217, 91%, 54%);
+  --primary-foreground: hsl(222, 47%, 11%);
+  --secondary: hsl(262, 83%, 58%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --accent: hsl(43, 96%, 56%);
+  --accent-foreground: hsl(222, 47%, 11%);
+  --destructive: hsl(0, 63%, 31%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(217, 91%, 54%);
+  --radius: 0.5rem;
+  --brand-red: hsl(0, 74%, 42%);
+}
+
+.dark {
+  --background: hsl(222, 47%, 11%);
+  --foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217, 32%, 17%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --popover: hsl(222, 47%, 11%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 47%, 11%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --border: hsl(217, 32%, 17%);
+  --input: hsl(217, 32%, 17%);
+  --primary: hsl(217, 91%, 54%);
+  --primary-foreground: hsl(222, 47%, 11%);
+  --secondary: hsl(262, 83%, 58%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --accent: hsl(43, 96%, 56%);
+  --accent-foreground: hsl(222, 47%, 11%);
+  --destructive: hsl(0, 63%, 31%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(217, 91%, 54%);
+  --radius: 0.5rem;
+  --brand-red: hsl(0, 74%, 42%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    background: radial-gradient(ellipse at center, #0a192f 0%, #112240 50%, #020c1b 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent to-white bg-clip-text text-transparent;
+    filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.5));
+  }
+
+  .floating-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
+  }
+
+  .neon-border {
+    border: 2px solid currentColor;
+    box-shadow: 0 0 10px currentColor, inset 0 0 10px currentColor;
+  }
+
+  .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-move 20s linear infinite;
+  }
+
+  .holographic {
+    background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+    background-size: 400% 400%;
+    animation: holographic 4s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.8);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes grid-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+@keyframes holographic {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.mobile-menu-enter {
+  transform: translateX(-100%);
+}
+
+.mobile-menu-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease-out;
+}
+
+.mobile-menu-exit {
+  transform: translateX(0);
+}
+
+.mobile-menu-exit-active {
+  transform: translateX(-100%);
+  transition: transform 300ms ease-out;
+}
