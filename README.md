@@ -1,61 +1,49 @@
-# SCMTS 2025 - Talent Search Application
+# SCNTSE 2025 - National Talent Search Examination
 
 ## Overview
+SCNTSE (Prof. Dr. Satyajit Chakrabarti National Talent Search Examination) is a modern web application designed to discover and nurture student talent in Science & Humanities (Physics, Maths, Chemistry, English). The platform empowers students and educators with innovative tools and insights.
 
-This is a React-based web application for the Prof. (Dr.) Satyajit Chakrabarti  Talent Search 2025. 
+## Technology Stack
 
-## System Architecture
+### Frontend
+- **Framework:** React 18 (TypeScript)
+- **Build Tool:** Vite
+- **Routing:** Wouter
+- **UI Framework:** Tailwind CSS, shadcn/ui
+- **State Management:** TanStack Query
+- **Form Handling:** React Hook Form + Zod
+- **Icons:** Lucide React
+- **Date Handling:** date-fns
 
-### Frontend Architecture
-- **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite for fast development and optimized builds
-- **Routing**: Wouter for client-side routing
-- **UI Framework**: Tailwind CSS with shadcn/ui components
-- **State Management**: TanStack Query for server state management
-- **Form Handling**: React Hook Form with Zod validation
+### Backend
+- **Runtime:** Node.js
+- **Server:** Express.js (TypeScript, ES modules)
+- **Development:** tsx for TypeScript execution
 
-### Backend Architecture
-- **Runtime**: Node.js with Express.js
-- **Language**: TypeScript with ES modules
+## Key Features
+- **Single-page Application:** Smooth navigation and fast performance
+- **Responsive Design:** Mobile-first, dark theme by default
+- **Comprehensive UI:** Modular components for navigation, hero, about, exam info, venues, FAQ, and more
+- **Interactive Tools:** Subject selection, countdown timer, and more
 
-## Key Components
+## Hosting & Deployment
+- **Current Hosting:** Vercel (https://scmts.vercel.app/)
+- **Recommended Upgrade:** Vercel Pro for increased resource limits and scalability
+- **Alternative:** Can be deployed on a VM if required, but Vercel Pro is preferred for Node.js/React projects
 
-### Frontend Components
-- **Navigation**: Fixed navigation with smooth scrolling
-- **Hero Section**:  introduction with exam date
-- **About Section**: Information about SCMTS
-- **Questionnaire Section**: Interactive subject selection tool
-- **Exam Info Section**: Detailed examination structure
-- **Venues Section**: Exam location information
-- **FAQ Section**: Collapsible frequently asked questions
-- **Footer**: Contact information and quick links
+## Repository
+- **GitHub:** Not yet available, but can be created if required for CI/CD and collaboration
 
-### UI System
-- **Component Library**: Comprehensive shadcn/ui components
-- **Design System**: Consistent styling with CSS variables
-- **Responsive Design**: Mobile-first approach with Tailwind breakpoints
-- **Dark Theme**: Default dark theme with custom color palette
+## Additional Services
+- No external database or storage services (MySQL, MongoDB, S3) are currently required. Future integrations can be discussed as needed.
 
-## Data Flow
+## Project Structure
+- `client/` - Frontend source code
+- `server/` - Express backend
+- `shared/` - Shared schema and types
+- `attached_assets/` - Images and assets
 
-### Navigation Flow
-1. Single-page application with smooth scrolling navigation
-2. Wouter handles client-side routing
-3. 404 page for undefined routes
-4. Responsive mobile navigation with sheet component
-
-## External Dependencies
-
-### Frontend Dependencies
-- **React Ecosystem**: React, React DOM, React Hook Form
-- **UI Components**: Radix UI primitives, shadcn/ui components
-- **Styling**: Tailwind CSS, class-variance-authority, clsx
-- **Data Fetching**: TanStack Query
-- **Routing**: Wouter
-- **Icons**: Lucide React
-- **Validation**: Zod
-- **Date Handling**: date-fns
-
-### Backend Dependencies
-- **Server**: Express.js
-- **Development**: tsx for TypeScript execution
+## Getting Started
+1. Clone the repository (when available)
+2. Install dependencies: `npm install`
+3. Start development server: `npm run dev`
