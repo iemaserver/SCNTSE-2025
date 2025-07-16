@@ -4,14 +4,6 @@ import CountdownTimer from "@/components/countdown-timer";
 import { Button } from "@/components/ui/button";
 import { Clock, Sparkles } from "lucide-react";
 import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
 export default function HeroSection() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -117,41 +109,22 @@ export default function HeroSection() {
           {/* Register Now Button */}
           <div className="mt-8 mb-8">
             <div className="relative inline-block group">
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button className="relative bg-gradient-to-r from-secondary via-primary to-accent text-white px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-105 disabled:opacity-100 disabled:cursor-not-allowed">
-                    <div className="absolute inset-0 bg-gradient-to-r from-secondary via-primary to-accent opacity-75 animate-pulse"></div>
-                    <div className="relative flex items-center gap-3">
-                      <Sparkles className="h-6 w-6 animate-pulse" />
-                      <span className="bg-gradient-to-r from-white to-yellow-200 bg-clip-text text-transparent">
-                        Register Now
-                      </span>
-                      <Sparkles className="h-6 w-6 animate-pulse" />
-                    </div>
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="glass-effect border-accent/30 max-w-md">
-                  <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold text-accent text-center">
-                      Coming Soon!
-                    </DialogTitle>
-                    <DialogDescription className="text-center text-gray-300 mt-4">
-                      Registration for SCNTSE 2025 will open soon. Stay tuned for
-                      updates!
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="flex justify-center mt-6">
-                    <div className="flex items-center gap-2 text-accent">
-                      <Sparkles className="h-5 w-5 animate-pulse" />
-                      <span className="text-sm font-medium">
-                        Keep checking this website for updates
-                      </span>
-                      <Sparkles className="h-5 w-5 animate-pulse" />
-                    </div>
+              <a
+                href="https://forms.gle/pEG13YJzyJoUBoMf9"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="relative bg-gradient-to-r from-secondary via-primary to-accent text-white px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-105">
+                  <div className="absolute inset-0 bg-gradient-to-r from-secondary via-primary to-accent opacity-75 animate-pulse"></div>
+                  <div className="relative flex items-center gap-3">
+                    <Sparkles className="h-6 w-6 animate-pulse" />
+                    <span className="bg-gradient-to-r from-white to-yellow-200 bg-clip-text text-transparent">
+                      Register Now
+                    </span>
+                    <Sparkles className="h-6 w-6 animate-pulse" />
                   </div>
-                </DialogContent>
-              </Dialog>
-
+                </Button>
+              </a>
               {/* Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-secondary via-primary to-accent rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 -z-10"></div>
             </div>
