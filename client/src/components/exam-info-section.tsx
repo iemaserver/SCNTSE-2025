@@ -18,27 +18,32 @@ export default function ExamInfoSection() {
           <div className="flex flex-col md:flex-row justify-center gap-4 mb-8">
             <div className="flex-1 bg-gradient-to-br from-blue-900/80 via-cyan-900/80 to-purple-900/80 rounded-2xl shadow-xl p-6 border-2 border-accent/30 glass-effect">
               <h4 className="text-lg font-bold text-blue-200 mb-2 flex items-center gap-2"><BookOpen className="h-5 w-5 text-blue-300" /> Round 1</h4>
-              <ul className="text-gray-200 text-left list-disc list-inside text-base">
-                <li>MCQ Exam on PCME (25 marks each)</li>
-                <li>2 hours | No negative marking</li>
-                <li>2nd August, 11:00 AM - 1:00 PM</li>
-                <li>Reporting: 10:00 AM</li>
+              <ul className="text-gray-200 text-left list-disc list-inside text-base space-y-1">
+                <li><span className="font-semibold text-accent">MCQ Exam</span> on Physics, Chemistry, Mathematics, and English (PCME)</li>
+                <li>25 questions per subject (total 100 questions)</li>
+                <li>Each question carries 1 mark</li>
+                <li><span className="font-semibold">Duration:</span> 2 hours</li>
+                <li>No negative marking</li>
+                <li><span className="font-semibold">Date:</span> 2nd August, 11:00 AM - 1:00 PM (Reporting: 10:00 AM)</li>
               </ul>
             </div>
             <div className="flex-1 bg-gradient-to-br from-purple-900/80 via-pink-900/80 to-yellow-900/80 rounded-2xl shadow-xl p-6 border-2 border-accent/30 glass-effect">
               <h4 className="text-lg font-bold text-pink-200 mb-2 flex items-center gap-2"><Target className="h-5 w-5 text-pink-300" /> Round 2</h4>
-              <ul className="text-gray-200 text-left list-disc list-inside text-base">
-                <li>Descriptive Exam on PCME (25 marks each)</li>
-                <li>Attempt any 5 out of 7 questions (5 marks each)</li>
-                <li>3 hours</li>
-                <li>10th August, 10:30 AM - 1:30 PM</li>
+              <ul className="text-gray-200 text-left list-disc list-inside text-base space-y-1">
+                <li><span className="font-semibold text-accent">Descriptive Exam</span> on PCME</li>
+                <li>7 questions per subject, attempt any 5</li>
+                <li>Each question carries 5 marks (total 25 marks per subject)</li>
+                <li><span className="font-semibold">Duration:</span> 3 hours</li>
+                <li><span className="font-semibold">Date:</span> 10th August, 10:30 AM - 1:30 PM</li>
               </ul>
             </div>
             <div className="flex-1 bg-gradient-to-br from-green-900/80 via-cyan-900/80 to-blue-900/80 rounded-2xl shadow-xl p-6 border-2 border-accent/30 glass-effect">
               <h4 className="text-lg font-bold text-green-200 mb-2 flex items-center gap-2"><ArrowRight className="h-5 w-5 text-green-300" /> Round 3</h4>
-              <ul className="text-gray-200 text-left list-disc list-inside text-base">
-                <li>Interview & Project Showcase</li>
-                <li>23rd August, from 10:00 AM onwards</li>
+              <ul className="text-gray-200 text-left list-disc list-inside text-base space-y-1">
+                <li><span className="font-semibold text-accent">Interview & Project Showcase</span></li>
+                <li>Personal interview to assess subject knowledge, communication, and problem-solving skills</li>
+                <li>Innovative Project Presentation/Showcase</li>
+                <li><span className="font-semibold">Date:</span> 23rd August, from 10:00 AM onwards</li>
               </ul>
             </div>
           </div>
