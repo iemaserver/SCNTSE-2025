@@ -1,4 +1,4 @@
-import { Calendar, Users, BookOpen, ChevronDown } from "lucide-react";
+import { Calendar, Users, BookOpen, ChevronDown, Award, IndianRupee } from "lucide-react";
 import professorImage from "@assets/images.jpeg";
 import CountdownTimer from "@/components/countdown-timer";
 import { Button } from "@/components/ui/button";
@@ -64,31 +64,47 @@ export default function HeroSection() {
             Honoring Excellence in Science & Humanities
           </p>
 
-          <div className="flex flex-col lg:flex-row items-center justify-center space-y-6 lg:space-y-0 lg:space-x-8 slide-up">
-            <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+          <div className="flex flex-col items-center justify-center space-y-6 slide-up max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-6">
               <div className="glass-effect rounded-lg p-4 neon-border text-accent">
                 <div className="text-3xl font-bold flex items-center gap-2">
                   <Calendar className="h-8 w-8" />
-                  10th August 2025
+                  2nd Aug 2025
                 </div>
-                <div className="text-sm text-gray-300">Exam Date</div>
+                <div className="text-sm text-gray-300">Exam Date (Round 1)</div>
               </div>
-
               <div className="glass-effect rounded-lg p-4 neon-border text-secondary">
                 <div className="text-3xl font-bold flex items-center gap-2">
                   <Users className="h-8 w-8" />3 Rounds
                 </div>
                 <div className="text-sm text-gray-300">
-                  Written + Interview + Project
+                  MCQ + Descriptive + Interview/Project
                 </div>
               </div>
-
               <div className="glass-effect rounded-lg p-4 neon-border text-brand-red">
                 <div className="text-3xl font-bold flex items-center gap-2">
                   <BookOpen className="h-8 w-8" />Science & Humanities
                 </div>
                 <div className="text-sm text-gray-300">
                   Physics, Maths, Chemistry, English
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+              <div className="glass-effect rounded-lg p-4 neon-border text-yellow-400">
+                <div className="text-3xl font-bold flex items-center gap-2">
+                  <Award className="h-8 w-8" />Certificate for All
+                </div>
+                <div className="text-sm text-gray-300">
+                  Every participant receives a certificate
+                </div>
+              </div>
+              <div className="glass-effect rounded-lg p-4 neon-border text-green-400">
+                <div className="text-3xl font-bold flex items-center gap-2">
+                  <IndianRupee className="h-8 w-8" />Only ₹200 Fees
+                </div>
+                <div className="text-sm text-gray-300">
+                  Registration fee (incl. all taxes)
                 </div>
               </div>
             </div>

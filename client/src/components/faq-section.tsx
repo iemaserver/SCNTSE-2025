@@ -8,6 +8,10 @@ export default function FaqSection() {
 
   const faqs = [
     {
+      question: "What are the rounds and dates for SCNTSE 2025?",
+      answer: `There are 3 rounds:\n\n1. MCQ Exam on PCME (2nd August, 11:00 AM - 1:00 PM, report by 10:00 AM)\n2. Descriptive Exam on PCME (10th August, 10:30 AM - 1:30 PM)\n3. Interview & Project Showcase (23rd August, from 10:00 AM onwards)`
+    },
+    {
       question: "What subjects are included in SCNTSE?",
       answer: "SCNTSE covers Science & Humanities: Physics, Mathematics, Chemistry, and English (25 marks each)."
     },
@@ -16,32 +20,24 @@ export default function FaqSection() {
       answer: "All 12th pass students from any board in the year 2025 are eligible to register."
     },
     {
-      question: "What is the exam date?",
-      answer: "The exam will be held on 10th August 2025."
+      question: "What is the registration fee?",
+      answer: "The registration fee is INR 200 (inclusive of all taxes)."
+    },
+    {
+      question: "Will I get a certificate?",
+      answer: "Yes, all participants will receive a certificate of participation."
     },
     {
       question: "What is the scholarship amount for top performers?",
       answer: "The top performer will receive a scholarship of ₹1,00,000 INR (1 lakh rupees)."
     },
     {
+      question: "What is the exam pattern?",
+      answer: `Round 1: MCQ Exam on PCME (25 marks each, 2 hours, no negative marking).\nRound 2: Descriptive Exam on PCME (25 marks each, attempt any 5 out of 7 questions, 3 hours).\nRound 3: Interview & Project Showcase.`
+    },
+    {
       question: "How do I register for SCNTSE?",
       answer: "Registration will open soon on this website. Please check back regularly for updates and instructions."
-    },
-    {
-      question: "Is there any registration fee?",
-      answer: "Registration details, including any fees, will be announced soon. Stay tuned!"
-    },
-    {
-      question: "What is the exam pattern?",
-      answer: "The exam consists of 100 marks: Physics (25), Chemistry (25), Mathematics (25), and English (25). Duration: 3 hours."
-    },
-    {
-      question: "Will I get a certificate?",
-      answer: "Yes, all Round 1 qualifiers will receive a certificate of merit."
-    },
-    {
-      question: "What are the rounds after the written exam?",
-      answer: "There are three rounds: Written Test, Interview, and Project. Only qualifiers move to the next round."
     },
     {
       question: "How will I know my exam venue?",

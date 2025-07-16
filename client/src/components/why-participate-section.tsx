@@ -6,7 +6,7 @@ export default function WhyParticipateSection() {
     {
       icon: Trophy,
       title: "Prestigious Recognition",
-      description: "Be part of a  competition honoring academic excellence and join the legacy of outstanding scholars.",
+      description: "Be part of a national competition honoring academic excellence and join the legacy of outstanding scholars.",
       gradient: "from-accent to-brand-red",
     },
     {
@@ -17,14 +17,14 @@ export default function WhyParticipateSection() {
     },
     {
       icon: Award,
-      title: "Certificate of Merit",
-      description: "All Round 1 qualifiers receive certificates that enhance your academic profile and college applications.",
+      title: "Participation Certificate",
+      description: "All participants receive a certificate, adding value to your academic profile and college applications.",
       gradient: "from-green-500 to-blue-500",
     },
     {
       icon: Brain,
-      title: "Skill Assessment",
-      description: "Showcase your knowledge in Physics, Chemistry, Mathematics, and English through a single, comprehensive examination.",
+      title: "Multi-Stage Assessment",
+      description: "Showcase your knowledge and skills through MCQ, Descriptive, and Interview/Project rounds.",
       gradient: "from-purple-500 to-pink-500",
     },
     {

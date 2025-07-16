@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, ExternalLink, Clock, Calendar } from "lucide-react";
+import { Mail, Phone, MapPin, ExternalLink, Clock, Calendar, Award } from "lucide-react";
 import IEM from "@assets/logo.png";
 import UEM from "@assets/image_1752080086077.png";
 import Lion from "@assets/l.jpg";
@@ -64,15 +64,6 @@ export default function Footer() {
                scntse@iem.edu.in
                   </a>
                 </div>
-                <div className="flex items-center gap-3 text-white/80">
-                  <Phone className="h-4 w-4 text-accent" />
-                  <a 
-                    href="tel:+91-33-6653-2700" 
-                    className="hover:text-accent transition-colors text-sm"
-                  >
-                    +91-33-6653-2700
-                  </a>
-                </div>
                 <div className="flex items-start gap-3 text-white/80">
                   <MapPin className="h-4 w-4 text-accent mt-0.5" />
                   <div className="text-sm">
@@ -113,15 +104,43 @@ export default function Footer() {
                 <div className="flex items-center gap-3 text-white/80">
                   <Calendar className="h-4 w-4 text-accent" />
                   <div className="text-sm">
-                    <p className="font-semibold">Exam Date</p>
-                    <p>August 10, 2025</p>
+                    <p className="font-semibold">Round 1: MCQ Exam</p>
+                    <p>2nd August 2025, 11:00 AM - 1:00 PM (Report by 10:00 AM)</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 text-white/80">
+                  <Calendar className="h-4 w-4 text-accent" />
+                  <div className="text-sm">
+                    <p className="font-semibold">Round 2: Descriptive Exam</p>
+                    <p>10th August 2025, 10:30 AM - 1:30 PM</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 text-white/80">
+                  <Calendar className="h-4 w-4 text-accent" />
+                  <div className="text-sm">
+                    <p className="font-semibold">Round 3: Interview & Project</p>
+                    <p>23rd August 2025, from 10:00 AM onwards</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-white/80">
                   <Clock className="h-4 w-4 text-accent" />
                   <div className="text-sm">
-                    <p className="font-semibold">Duration</p>
-                    <p>3 Hours</p>
+                    <p className="font-semibold">Registration Fee</p>
+                    <p>₹200 (inclusive of all taxes)</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 text-white/80">
+                  <Award className="h-4 w-4 text-accent" />
+                  <div className="text-sm">
+                    <p className="font-semibold">Certificate</p>
+                    <p>All participants receive a certificate</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 text-white/80">
+                  <Award className="h-4 w-4 text-accent" />
+                  <div className="text-sm">
+                    <p className="font-semibold">Scholarship</p>
+                    <p>Top performer wins ₹1,00,000 INR</p>
                   </div>
                 </div>
               </div>
@@ -140,20 +159,7 @@ export default function Footer() {
                   Organized by Institute of Engineering & Management (IEM) and University of Engineering & Management (UEM)
                 </p>
               </div>
-              <div className="flex items-center gap-4">
-                <a href="#" className="text-white/60 hover:text-accent transition-colors text-sm">
-                  Privacy Policy
-                </a>
-                <span className="text-white/30">|</span>
-                <a href="#" className="text-white/60 hover:text-accent transition-colors text-sm">
-                  Terms & Conditions
-                </a>
-                <span className="text-white/30">|</span>
-                <a href="#" className="text-white/60 hover:text-accent transition-colors text-sm">
-                  Support
-                </a>
               </div>
-            </div>
           </div>
         </div>
       </div>
