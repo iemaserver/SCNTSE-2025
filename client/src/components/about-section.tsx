@@ -19,7 +19,7 @@ export default function AboutSection() {
                   <GraduationCap className="h-6 w-6 text-accent" />
                   <h3 className="text-xl font-semibold text-accent">Eligibility</h3>
                 </div>
-                <p className="text-gray-300">At least 70% in Physics, Chemistry and Maths in Board exams of the year 2025 from ANY board</p>
+                <p className="text-gray-300">At least 70% aggregated in Physics, Chemistry and Maths in Board exams of the year 2025 from ANY board</p>
               </div>
               <div className="bg-secondary/20 rounded-lg p-6 border border-secondary/30">
                 <div className="flex items-center gap-3 mb-3">

@@ -17,7 +17,7 @@ export default function FaqSection() {
     },
     {
       question: "Who is eligible to participate?",
-      answer: "At least 70% in Physics, Chemistry and Maths in Board exams of the year 2025 from ANY board are eligible to register."
+      answer: "At least 70% aggregated in Physics, Chemistry and Maths in Board exams of the year 2025 from ANY board are eligible to register."
     },
     {
       question: "What is the registration fee?",
