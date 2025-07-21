@@ -18,7 +18,8 @@ export default function AdmitCardPage() {
     setAdmitUrl(null);
     setLoading(true);
     try {
-      const res = await fetch("/api/admit", {
+      const VERCEL_API_URL = "https://api-server-mauve.vercel.app/api/admit";
+      const res = await fetch(VERCEL_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, parentEmail })

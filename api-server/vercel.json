@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/api/admit", "dest": "api/index.js" }
+  ],
+  "functions": {
+    "api/admit.js": {
+      "includeFiles": "api/uploaded_admit_cards.csv"
+    }
+  }
+}
