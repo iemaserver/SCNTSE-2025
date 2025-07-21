@@ -39,9 +39,13 @@ export async function setupVite(app: Express, server: Server) {
     server: serverOptions,
     appType: "custom",
   });
-
   app.use(vite.middlewares);
   app.use("*", async (req, res, next) => {
+    // Skip API routes - let them be handled by the registered routes
+    if (req.originalUrl.startsWith("/api")) {
+      return next();
+    }
+
     const url = req.originalUrl;
 
     try {
@@ -68,7 +72,7 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(import.meta.dirname, "public");
+  const distPath = path.resolve(import.meta.dirname, "..", "dist", "public");
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
@@ -78,13 +82,17 @@ export function serveStatic(app: Express) {
 
   // Only serve static files for non-API routes
   app.use((req, res, next) => {
-    if (req.path.startsWith("/api")) return next();
+    if (req.path.startsWith("/api")) {
+      return next();
+    }
     express.static(distPath)(req, res, next);
   });
 
-  // fall through to index.html for non-API, non-file routes
+  // fall through to index.html for non-API, non-file routes (SPA fallback)
   app.use((req, res, next) => {
-    if (req.path.startsWith("/api")) return next();
+    if (req.path.startsWith("/api")) {
+      return next();
+    }
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }
