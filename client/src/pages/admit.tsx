@@ -50,7 +50,7 @@ export default function AdmitCardPage() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-white mb-1 font-medium">Username (Your Email)</label>
+              <label className="block text-white mb-1 font-medium">Email (Username)</label>
               <Input
                 type="email"
                 value={email}
@@ -61,7 +61,7 @@ export default function AdmitCardPage() {
               />
             </div>
             <div>
-              <label className="block text-white mb-1 font-medium">Password (Your Parent's Email) </label>
+              <label className="block text-white mb-1 font-medium">Parent's Email (Password)</label>
               <div className="relative">
                 <Input
                   type={showPassword ? "text" : "password"}
