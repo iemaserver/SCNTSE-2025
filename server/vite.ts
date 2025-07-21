@@ -76,10 +76,15 @@ export function serveStatic(app: Express) {
     );
   }
 
-  app.use(express.static(distPath));
+  // Only serve static files for non-API routes
+  app.use((req, res, next) => {
+    if (req.path.startsWith("/api")) return next();
+    express.static(distPath)(req, res, next);
+  });
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
+  // fall through to index.html for non-API, non-file routes
+  app.use((req, res, next) => {
+    if (req.path.startsWith("/api")) return next();
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }

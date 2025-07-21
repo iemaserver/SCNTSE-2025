@@ -53,12 +53,8 @@ app.use((req, res, next) => {
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    // Only serve static files for non-API routes
-    app.use((req, res, next) => {
-      if (req.path.startsWith("/api")) return next();
-      serveStatic(app);
-      next();
-    });
+    // Serve static files, but do NOT override /api routes
+    serveStatic(app);
   }
 
   // ALWAYS serve the app on port 5000
