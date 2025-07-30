@@ -115,10 +115,10 @@ export default function AdmitCardPage() {
             The Admit Card has been issued based on the information provided by the candidate, which is presumed to fulfill all eligibility criteria as per the examination guidelines. However, if at any stage of the examination process it is found that the candidate has furnished false, incorrect, or misleading information, the Admit Card will be deemed invalid, and the candidature will be cancelled immediately. This cancellation may occur at any stage — before, during, or after the examination — without any further notice.
           </p>
           <h4 className="text-lg sm:text-xl font-semibold text-accent mb-2">Possible Reasons You Are Unable to Download the Admit Card</h4>
-          <ul className="list-disc pl-5 sm:pl-8 text-white/90 space-y-1 text-sm sm:text-base">
-            <li><span className="font-semibold text-accent">Entered Username</span> HAS TO BE SAME AS THE EMAIL ENTERED IN THE FORM</li>
-            <li><span className="font-semibold text-accent">Entered PASSWORD</span> HAS TO BE SAME AS THE PARENT'S EMAIL ENTERED IN THE FORM</li>
-            <li><span className="font-semibold text-accent">The candidate was Ineligible</span> (2023 or 2024 passouts)</li>
+          <ul className="pl-5 sm:pl-8 space-y-2 text-sm sm:text-base">
+            <li className="flex items-start gap-2 text-green-400"><span className="text-xl">✅</span> <span>The Username must be the same as the email ID you entered in the registration form.</span></li>
+            <li className="flex items-start gap-2 text-green-400"><span className="text-xl">✅</span> <span>The Password must be the same as the parent’s email ID provided during registration.</span></li>
+            <li className="flex items-start gap-2 text-red-400"><span className="text-xl">❌</span> <span>Candidates from 2023 or 2024 passout batches are ineligible, and their admit cards will not be issued.</span></li>
           </ul>
         </section>
       </div>
