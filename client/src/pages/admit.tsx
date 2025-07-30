@@ -18,6 +18,7 @@ export default function AdmitCardPage() {
     setAdmitUrl(null);
     setLoading(true);
     try {
+      // Replace with your actual Vercel deployment URL
       const VERCEL_API_URL = "https://api-server-mauve.vercel.app/api/admit";
       const res = await fetch(VERCEL_API_URL, {
         method: "POST",
