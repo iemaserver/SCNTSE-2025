@@ -10,7 +10,7 @@ export default function CountdownTimer() {
   });
 
   useEffect(() => {
-    const examDate = new Date('2025-08-02T10:00:00');
+    const examDate = new Date('2025-08-10T10:00:00');
     
     const calculateTimeLeft = () => {
       const now = new Date();
@@ -89,7 +89,7 @@ export default function CountdownTimer() {
       <div className="text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20">
           <Calendar className="h-4 w-4 text-accent" />
-          <span className="text-sm font-medium text-gray-200">Until DSCMNTSE 2025 Exam</span>
+          <span className="text-sm font-medium text-gray-200">Until 2nd Round</span>
         </div>
       </div>
     </div>

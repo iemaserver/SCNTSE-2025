@@ -106,27 +106,12 @@ export default function HeroSection() {
               <CountdownTimer />
             </div>
           </div>
-          {/* Register Now Button */}
-          <div className="mt-8 mb-8">
-            <div className="relative inline-block group">
-              <a
-                href="https://forms.gle/pEG13YJzyJoUBoMf9"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button className="relative bg-gradient-to-r from-secondary via-primary to-accent text-white px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-105">
-                  <div className="absolute inset-0 bg-gradient-to-r from-secondary via-primary to-accent opacity-75 animate-pulse"></div>
-                  <div className="relative flex items-center gap-3">
-                    <Sparkles className="h-6 w-6 animate-pulse" />
-                    <span className="bg-gradient-to-r from-white to-yellow-200 bg-clip-text text-transparent">
-                      Register Now
-                    </span>
-                    <Sparkles className="h-6 w-6 animate-pulse" />
-                  </div>
-                </Button>
-              </a>
-              {/* Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-secondary via-primary to-accent rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 -z-10"></div>
+          {/* Results Announcement */}
+          <div className="flex justify-center mb-8">
+            <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 shadow-lg border-4 border-blue-200 animate-pulse">
+              <span className="text-2xl md:text-3xl font-bold text-blue-900 drop-shadow-lg">
+                Results of Round 1 will be published soon
+              </span>
             </div>
           </div>
         </div>
