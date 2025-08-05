@@ -34,7 +34,8 @@ export default function ExamInfoSection() {
                 <li>7 questions per subject, attempt any 5</li>
                 <li>Each question carries 5 marks (total 25 marks per subject)</li>
                 <li><span className="font-semibold">Duration:</span> 3 hours</li>
-                <li><span className="font-semibold">Date:</span> 10th August, 10:30 AM - 1:30 PM</li>
+                <li><span className="font-semibold">Date:</span> 10th August, 11:00 AM - 2:00 PM (Reporting: 10:00 AM) </li>
+              <li><span className="font-semibold">Venue:</span> IEM Management House </li>
               </ul>
             </div>
             <div className="flex-1 bg-gradient-to-br from-green-900/80 via-cyan-900/80 to-blue-900/80 rounded-2xl shadow-xl p-6 border-2 border-accent/30 glass-effect">

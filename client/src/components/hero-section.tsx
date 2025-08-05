@@ -4,6 +4,14 @@ import CountdownTimer from "@/components/countdown-timer";
 import { Button } from "@/components/ui/button";
 import { Clock, Sparkles } from "lucide-react";
 import { useState } from "react";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 export default function HeroSection() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -106,11 +114,50 @@ export default function HeroSection() {
               <CountdownTimer />
             </div>
           </div>
+
+          {/* Download Eligible Students Button */}
+          <div className="flex justify-center mb-8">
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <button
+                  type="button"
+                  className="text-lg font-bold px-8 py-4 rounded-2xl bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 shadow-2xl border-4 border-yellow-300 hover:scale-105 hover:shadow-amber-500/50 transition-all duration-200 focus:ring-4 focus:ring-yellow-400 focus:outline-none"
+                  onClick={() => setIsDialogOpen(true)}
+                >
+                  Download List of Eligible Students for Round 2
+                </button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-bold mb-4 text-center">
+                    Important Instructions for Round 2 Examination
+                  </DialogTitle>
+                  <DialogDescription asChild>
+                    <ul className="list-disc pl-5 text-gray-700 mb-6 space-y-2">
+                      <li>All candidates must bring one photocopy of their 12th standard marksheet.</li>
+                      <li>Two photocopies of the SCNTSE Round 2 Admit Card are required. (Admit cards will be released soon.)</li>
+                      <li>The Round 2 examination will be held on <b>10th August 2025</b> from <b>11:00 AM to 2:00 PM</b>.</li>
+                      <li>Venue: <b>IEM Management House</b></li>
+                      <li>Reporting time is <b>10:00 AM</b>. Late arrivals may not be permitted.</li>
+                      <li>Please ensure you carry a valid government-issued photo identification proof.</li>
+                    </ul>
+                  </DialogDescription>
+                </DialogHeader>
+                <a
+                  href="/notice.pdf"
+                  download
+                  className="block w-full text-center bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition mb-2"
+                >
+                  Download Notice PDF
+                </a>
+              </DialogContent>
+            </Dialog>
+          </div>
           {/* Results Announcement */}
           <div className="flex justify-center mb-8">
             <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 shadow-lg border-4 border-blue-200 animate-pulse">
               <span className="text-2xl md:text-3xl font-bold text-blue-900 drop-shadow-lg">
-                Results of Round 1 will be published soon
+                Admit cards for Round 2 will be published soon
               </span>
             </div>
           </div>
