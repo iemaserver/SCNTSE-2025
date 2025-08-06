@@ -155,11 +155,9 @@ export default function HeroSection() {
           </div>
           {/* Results Announcement */}
           <div className="flex justify-center mb-8">
-            <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 shadow-lg border-4 border-blue-200 animate-pulse">
-              <span className="text-2xl md:text-3xl font-bold text-blue-900 drop-shadow-lg">
-                Admit cards for Round 2 will be published soon
-              </span>
-            </div>
+            <a href="/admit" className="text-lg font-bold px-8 py-4 rounded-2xl bg-gradient-to-r from-green-400 via-green-500 to-green-600 shadow-2xl border-4 border-green-300 hover:scale-105 hover:shadow-green-500/50 transition-all duration-200 focus:ring-4 focus:ring-green-400 focus:outline-none text-white">
+              Download Admit Card For Round 2
+            </a>
           </div>
         </div>
       </div>
