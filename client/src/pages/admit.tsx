@@ -29,7 +29,7 @@ export default function AdmitCardPage() {
       if (res.ok && data.url) {
         setAdmitUrl(data.url);
       } else {
-        setError(data.message || "Invalid credentials");
+        setError((data.message || "Invalid credentials") + " If your email and parent email don't work, try using your first name only as the username.");
       }
     } catch {
       setError("Network error. Please try again.");
@@ -53,9 +53,9 @@ export default function AdmitCardPage() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-white mb-1 font-medium">Username (Your Email)</label>
+                <label className="block text-white mb-1 font-medium">Username (Your Email or First Name as entered during registration)</label>
                 <Input
-                  type="email"
+                  type="text"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   required
@@ -64,13 +64,12 @@ export default function AdmitCardPage() {
                 />
               </div>
               <div>
-                <label className="block text-white mb-1 font-medium">Password (Your Parent's Email)</label>
+                <label className="block text-white mb-1 font-medium">Password (Your Parent's Email, leave blank if not provided during registration)</label>
                 <div className="relative">
                   <Input
                     type={showPassword ? "text" : "password"}
                     value={parentEmail}
                     onChange={e => setParentEmail(e.target.value)}
-                    required
                     autoComplete="current-password"
                     className="bg-white/20 text-white pr-10"
                   />
@@ -84,6 +83,7 @@ export default function AdmitCardPage() {
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
                 </div>
+                <p className="text-xs text-white/70 mt-1">If you did not provide a parent email during registration, leave this blank.</p>
               </div>
               {error && <div className="text-red-400 text-sm text-center">{error}</div>}
               <Button type="submit" className="w-full" disabled={loading}>
@@ -100,14 +100,11 @@ export default function AdmitCardPage() {
           <h3 className="text-xl sm:text-2xl font-bold text-accent mb-4 text-left">Important Instructions</h3>
           <ul className="list-disc pl-5 sm:pl-8 text-white/90 space-y-2 text-sm sm:text-base">
             <li>This admit card shall be considered valid only upon the candidate's fulfillment of all eligibility criteria, including qualifying marks, year of passing Class 12, and successful completion of payment.</li>
-            <li>The round 1 examination will be held from 11:00 AM to 1:00 PM, and candidates must report by 10:00 AM as entry will close strictly at 10:30 AM. No student is allowed to leave the exam hall before 1:00 PM.</li>
+            <li>The round 2 examination will be held from 11:00 AM to 2:00 PM, and candidates must report by 10:00 AM as entry will close strictly at 10:30 AM. No student is allowed to leave the exam hall before 1:00 PM.</li>
             <li>Bring the original SCNTSE-2025 Admit Card and a valid original photo ID (Aadhaar/PAN/Passport/School ID).</li>
-            <li>Carry one passport size colour photograph (same as uploaded during application).</li>
+            <li>Carry Two Photocopies of this admit and two photocopies of 12th Marksheet along with original Govt Photo ID.</li>
             <li>Candidates are strictly instructed not to adopt any unfair means or malpractices and not to misbehave with the examination officials during the examination. Candidates must adhere to all the examination rules and regulations regarding their conduct in the Examination Hall. All cases of unfair means will lead to cancellation of examination of the concerned candidate.</li>
-            <li>Use only the blue/black ballpoint pen for filling the OMR sheet. Do not use any whitener, gel pen, correction fluid, or pencils.</li>
             <li>Usage of calculators, electronic devices such as mobile phones, digital watch, fitness band, headphones and similar devices are strictly not allowed inside the examination hall.</li>
-            <li>Submit both OMR sheet and question booklet to the invigilator before leaving the examination hall.</li>
-            <li>No extra OMR sheet will be provided to the candidates under any circumstances.</li>
             <li>Decision of the Exam coordinators are final in all regards.</li>
           </ul>
           <h4 className="text-lg sm:text-xl font-semibold text-accent mt-8 mb-2">Disclaimer</h4>
@@ -118,7 +115,7 @@ export default function AdmitCardPage() {
           <ul className="pl-5 sm:pl-8 space-y-2 text-sm sm:text-base">
             <li className="flex items-start gap-2 text-green-400"><span className="text-xl">✅</span> <span>The Username must be the same as the email ID you entered in the registration form.</span></li>
             <li className="flex items-start gap-2 text-green-400"><span className="text-xl">✅</span> <span>The Password must be the same as the parent’s email ID provided during registration.</span></li>
-            <li className="flex items-start gap-2 text-red-400"><span className="text-xl">❌</span> <span>Candidates from 2023 or 2024 passout batches are ineligible, and their admit cards will not be issued.</span></li>
+            <li className="flex items-start gap-2 text-red-400"><span className="text-xl">❌</span> <span>You did not qualify Round 1.</span></li>
           </ul>
         </section>
       </div>

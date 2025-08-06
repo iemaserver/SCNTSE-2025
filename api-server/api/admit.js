@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   }
 
   const { email, parentEmail } = req.body || {};
-  if (!email || !parentEmail) {
+  if (!email) {
     res.status(400).json({ message: 'Missing credentials' });
     return;
   }
@@ -35,12 +35,27 @@ export default async function handler(req, res) {
   let found = false;
   const parser = createReadStream(csvPath).pipe(parse({ columns: true, trim: true, delimiter: ',' }));
   for await (const record of parser) {
-    const emailMatch = (record['Email'] || '').trim().toLowerCase() === email.trim().toLowerCase();
-    const pwMatch = (record['Parent Email'] || '').trim().toLowerCase() === parentEmail.trim().toLowerCase();
-    if (emailMatch && pwMatch) {
-      res.status(200).json({ url: record.URL || record.url });
-      found = true;
-      break;
+    const recordEmail = (record['Email'] || '').trim().toLowerCase();
+    const recordParentEmail = (record['Parent Email'] || '').trim().toLowerCase();
+    const inputEmail = email.trim().toLowerCase();
+    const inputParentEmail = (parentEmail || '').trim().toLowerCase();
+
+    if (recordEmail === inputEmail) {
+      if (recordParentEmail) {
+        // Parent email exists, must match and not be blank
+        if (inputParentEmail && recordParentEmail === inputParentEmail) {
+          res.status(200).json({ url: record.URL || record.url });
+          found = true;
+          break;
+        }
+      } else {
+        // No parent email in record, allow blank password
+        if (!inputParentEmail) {
+          res.status(200).json({ url: record.URL || record.url });
+          found = true;
+          break;
+        }
+      }
     }
   }
   if (!found) {
