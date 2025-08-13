@@ -124,7 +124,7 @@ export default function HeroSection() {
                   className="text-lg font-bold px-8 py-4 rounded-2xl bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 shadow-2xl border-4 border-yellow-300 hover:scale-105 hover:shadow-amber-500/50 transition-all duration-200 focus:ring-4 focus:ring-yellow-400 focus:outline-none"
                   onClick={() => setIsDialogOpen(true)}
                 >
-                  Download List of Eligible Students for Round 2
+                  Download List of Eligible Students for Round 3
                 </button>
               </DialogTrigger>
               <DialogContent>
