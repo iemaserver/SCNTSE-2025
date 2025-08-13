@@ -116,6 +116,7 @@ export default function HeroSection() {
           </div>
 
           {/* Download Eligible Students Button */}
+          {/*
           <div className="flex justify-center mb-8">
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
@@ -153,12 +154,24 @@ export default function HeroSection() {
               </DialogContent>
             </Dialog>
           </div>
+          */}
+          <div className="flex justify-center mb-8">
+            <a
+              href="/notice.pdf"
+              download
+              className="text-lg font-bold px-8 py-4 rounded-2xl bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 shadow-2xl border-4 border-yellow-300 hover:scale-105 hover:shadow-amber-500/50 transition-all duration-200 focus:ring-4 focus:ring-yellow-400 focus:outline-none text-white"
+            >
+              Download List of Eligible Students for Round 3
+            </a>
+          </div>
           {/* Results Announcement */}
+          {/*
           <div className="flex justify-center mb-8">
             <a href="/admit" className="text-lg font-bold px-8 py-4 rounded-2xl bg-gradient-to-r from-green-400 via-green-500 to-green-600 shadow-2xl border-4 border-green-300 hover:scale-105 hover:shadow-green-500/50 transition-all duration-200 focus:ring-4 focus:ring-green-400 focus:outline-none text-white">
               Download Admit Card For Round 2
             </a>
           </div>
+          */}
         </div>
       </div>
 
