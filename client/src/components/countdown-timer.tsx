@@ -10,7 +10,7 @@ export default function CountdownTimer() {
   });
 
   useEffect(() => {
-    const examDate = new Date('2025-08-10T10:00:00');
+    const examDate = new Date('2025-08-23T9:30:00');
     
     const calculateTimeLeft = () => {
       const now = new Date();
