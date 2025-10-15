@@ -207,9 +207,8 @@ export default function HeroSection() {
               <div className="glass-effect rounded-xl p-4 border border-blue-400/30">
                 <div className="flex items-center gap-3 mb-2">
                   <Award className="h-5 w-5 text-blue-400" />
-                  <span className="font-semibold text-blue-400">Next Round</span>
+                  <span className="font-semibold text-blue-400">Winners will be contacted soon</span>
                 </div>
-                <p className="text-sm text-gray-300">Details will be announced soon</p>
               </div>
             </div>
           </div>
