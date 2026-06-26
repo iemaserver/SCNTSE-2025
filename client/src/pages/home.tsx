@@ -4,6 +4,7 @@ import AboutSection from "@/components/about-section";
 import ExamInfoSection from "@/components/exam-info-section";
 import VenuesSection from "@/components/venues-section";
 import WhyParticipateSection from "@/components/why-participate-section";
+import WinnersSection from "@/components/winners-section";
 import FaqSection from "@/components/faq-section";
 import Footer from "@/components/footer";
 import ParticleBackground from "@/components/particle-background";
@@ -19,6 +20,7 @@ export default function Home() {
         <ExamInfoSection />
         <VenuesSection />
         <WhyParticipateSection />
+        <WinnersSection />
         <FaqSection />
         <Footer />
       </div>

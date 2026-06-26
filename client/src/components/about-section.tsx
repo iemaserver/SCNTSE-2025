@@ -19,7 +19,7 @@ export default function AboutSection() {
                   <GraduationCap className="h-6 w-6 text-accent" />
                   <h3 className="text-xl font-semibold text-accent">Eligibility</h3>
                 </div>
-                <p className="text-gray-300">At least 70% aggregated in Physics, Chemistry and Maths in Board exams of the year 2025 from ANY board.<br />
+                <p className="text-gray-300">At least 70% aggregated in Physics, Chemistry and Maths in Board exams of the year 2026 from ANY board.<br />
                   <span className="text-red-400 font-semibold">If any student is found violating the eligibility criteria, his/her exams will be cancelled and no fees will be refunded.</span>
                 </p>
               </div>

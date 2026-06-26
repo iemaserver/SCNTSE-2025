@@ -91,6 +91,9 @@ export default function Footer() {
                 <a href="#why-participate" className="block text-white/80 hover:text-accent transition-colors text-sm">
                   Why Participate
                 </a>
+                <a href="#winners" className="block text-white/80 hover:text-accent transition-colors text-sm">
+                  2025 Winners
+                </a>
                 <a href="#faq" className="block text-white/80 hover:text-accent transition-colors text-sm">
                   FAQs
                 </a>
@@ -105,21 +108,21 @@ export default function Footer() {
                   <Calendar className="h-4 w-4 text-accent" />
                   <div className="text-sm">
                     <p className="font-semibold">Round 1: MCQ Exam</p>
-                    <p>2nd August 2025, 11:00 AM - 1:00 PM (Report by 10:00 AM)</p>
+                    <p>1st August 2026, 11:00 AM - 1:00 PM (Report by 10:00 AM)</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-white/80">
                   <Calendar className="h-4 w-4 text-accent" />
                   <div className="text-sm">
                     <p className="font-semibold">Round 2: Descriptive Exam</p>
-                    <p>10th August 2025, 10:30 AM - 1:30 PM</p>
+                    <p>9th August 2026, 11:00 AM - 2:00 PM</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-white/80">
                   <Calendar className="h-4 w-4 text-accent" />
                   <div className="text-sm">
                     <p className="font-semibold">Round 3: Interview & Project</p>
-                    <p>23rd August 2025, from 10:00 AM onwards</p>
+                    <p>22nd August 2026, from 10:00 AM onwards</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-white/80">
@@ -153,7 +156,7 @@ export default function Footer() {
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="text-center md:text-left">
                 <p className="text-white/60 text-sm">
-                  © 2025 SCNTSE - Prof. (Dr.) Satyajit Chakrabarti  National Talent Search Examination. All rights reserved.
+                  © 2026 SCNTSE - Prof. (Dr.) Satyajit Chakrabarti National Talent Search Examination. All rights reserved.
                 </p>
                 <p className="text-white/40 text-xs mt-1">
                   Organized by Institute of Engineering & Management (IEM) and University of Engineering & Management (UEM)

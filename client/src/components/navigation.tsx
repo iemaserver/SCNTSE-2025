@@ -12,6 +12,7 @@ export default function Navigation() {
     { href: "#exam-info", label: "Exam Info" },
     { href: "#venues", label: "Venues" },
     { href: "#why-participate", label: "Why Participate" },
+    { href: "#winners", label: "2025 Winners" },
   ];
 
   const handleNavClick = (href: string) => {
@@ -66,7 +67,7 @@ export default function Navigation() {
 
             <div className="relative">
               <span className="text-2xl font-bold bg-gradient-to-r from-accent via-white to-secondary bg-clip-text text-transparent drop-shadow-lg">
-                SCNTSE 2025
+                SCNTSE 2026
               </span>
 
               {/* Underline animation */}

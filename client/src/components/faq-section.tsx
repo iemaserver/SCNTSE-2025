@@ -8,8 +8,8 @@ export default function FaqSection() {
 
   const faqs = [
     {
-      question: "What are the rounds and dates for SCNTSE 2025?",
-      answer: `There are 3 rounds:\n\n1. MCQ Exam on PCME (2nd August, 11:00 AM - 1:00 PM, report by 10:00 AM)\n2. Descriptive Exam on PCME (10th August, 10:30 AM - 1:30 PM)\n3. Interview & Project Showcase (23rd August, from 10:00 AM onwards)`
+      question: "What are the rounds and dates for SCNTSE 2026?",
+      answer: `There are 3 rounds:\n\n1. MCQ Exam on PCME (1st August, 11:00 AM - 1:00 PM, report by 10:00 AM)\n2. Descriptive Exam on PCME (9th August, 11:00 AM - 2:00 PM)\n3. Interview & Project Showcase (22nd August, from 10:00 AM onwards)`
     },
     {
       question: "What subjects are included in SCNTSE?",
@@ -17,7 +17,7 @@ export default function FaqSection() {
     },
     {
       question: "Who is eligible to participate?",
-      answer: "At least 70% aggregated in Physics, Chemistry and Maths in Board exams of the year 2025 from ANY board are eligible to register. If any student is found violating the eligibility criteria, his/her exams will be cancelled and no fees will be refunded."
+      answer: "At least 70% aggregated in Physics, Chemistry and Maths in Board exams of the year 2026 from ANY board are eligible to register. If any student is found violating the eligibility criteria, his/her exams will be cancelled and no fees will be refunded."
     },
     {
       question: "What is the registration fee?",
