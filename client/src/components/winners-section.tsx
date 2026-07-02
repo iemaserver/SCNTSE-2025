@@ -31,6 +31,18 @@ export default function WinnersSection() {
             </div>
           </div>
 
+          {/* Winners Photo */}
+          <div className="mb-8 rounded-2xl overflow-hidden border border-yellow-400/30 shadow-2xl">
+            <img
+              src="/Winners.jpeg"
+              alt="SCNTSE 2025 Scholarship Winners"
+              className="w-full object-cover"
+            />
+            <div className="bg-black/50 py-3 text-sm text-yellow-300 font-semibold tracking-wide">
+              🏆 SCNTSE 2025 — Scholarship Winners
+            </div>
+          </div>
+
           {/* Winners note */}
           <div className="glass-effect rounded-2xl p-8 border border-white/10 shadow-xl mb-8">
             <div className="flex items-center justify-center gap-3 mb-4">
