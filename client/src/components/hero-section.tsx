@@ -1,6 +1,8 @@
-import { Calendar, Users, BookOpen, ChevronDown, Award, IndianRupee, Trophy, Star } from "lucide-react";
+import { Calendar, Users, BookOpen, ChevronDown, Award, IndianRupee, Trophy, Star, ExternalLink } from "lucide-react";
 import professorImage from "@assets/images.jpeg";
 import CountdownTimer from "@/components/countdown-timer";
+
+const REGISTRATION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdzihdCX1Q2RAmM_dOKOtUxuZD5SjoPKL6NzzCY5ntWfovKvg/viewform?usp=publish-editor";
 
 export default function HeroSection() {
   return (
@@ -24,8 +26,8 @@ export default function HeroSection() {
             SCNTSE 2026
           </h1>
 
-          {/* Scholarship Highlight */}
-          <div className="flex justify-center mb-6">
+          {/* Prize Pool Highlight */}
+          <div className="flex justify-center mb-4">
             <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-yellow-400 via-yellow-300 to-orange-400 shadow-lg border-4 border-yellow-200 animate-pulse">
               <svg
                 className="h-8 w-8 text-yellow-700"
@@ -37,7 +39,7 @@ export default function HeroSection() {
                 <path d="M12 8c-1.657 0-3 1.343-3 3 0 1.657 1.343 3 3 3s3-1.343 3-3c0-1.657-1.343-3-3-3zm0 13c-4.418 0-8-3.582-8-8 0-4.418 3.582-8 8-8s8 3.582 8 8c0 4.418-3.582 8-8 8zm0-18V2m0 20v-2m8-8h2m-20 0h2" />
               </svg>
               <span className="text-2xl md:text-3xl font-bold text-yellow-900 drop-shadow-lg">
-                Win a ₹1,00,000 INR Scholarship!
+                ₹10,00,000 Prize Pool — Top 10 Win ₹1,00,000 Each!
               </span>
             </div>
           </div>
@@ -46,9 +48,25 @@ export default function HeroSection() {
             Prof. (Dr.) Satyajit Chakrabarti National Talent Search Examination
           </p>
 
-          <p className="text-lg md:text-xl mb-8 text-gray-400 slide-up">
+          <p className="text-lg md:text-xl mb-6 text-gray-400 slide-up">
             Honoring Excellence in Science & Humanities
           </p>
+
+          {/* Registration Button */}
+          <div className="flex justify-center mb-8">
+            <a
+              href={REGISTRATION_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-accent via-blue-500 to-secondary text-white font-bold text-xl shadow-2xl border-2 border-accent/50 hover:scale-105 hover:shadow-accent/40 transition-all duration-200 focus:ring-4 focus:ring-accent focus:outline-none"
+            >
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+              Register Now for SCNTSE 2026
+              <ExternalLink className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
+            </a>
+          </div>
 
           <div className="flex flex-col items-center justify-center space-y-6 slide-up max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-6">
@@ -76,8 +94,16 @@ export default function HeroSection() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
               <div className="glass-effect rounded-lg p-4 neon-border text-yellow-400">
+                <div className="text-3xl font-bold flex items-center gap-2">
+                  <Trophy className="h-8 w-8" />₹10 Lakh
+                </div>
+                <div className="text-sm text-gray-300">
+                  Total prize pool — 10 scholarships of ₹1 lakh each
+                </div>
+              </div>
+              <div className="glass-effect rounded-lg p-4 neon-border text-yellow-300">
                 <div className="text-3xl font-bold flex items-center gap-2">
                   <Award className="h-8 w-8" />Certificate for All
                 </div>
@@ -102,6 +128,19 @@ export default function HeroSection() {
             </div>
           </div>
 
+          {/* Registration CTA (below timer) */}
+          <div className="flex justify-center mb-10">
+            <a
+              href={REGISTRATION_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-accent underline underline-offset-4 hover:text-white transition-colors text-base font-medium"
+            >
+              <ExternalLink className="h-4 w-4" />
+              Click here to register — Registration Fee: ₹200 only
+            </a>
+          </div>
+
           {/* SCNTSE 2025 Legacy Banner */}
           <div className="max-w-3xl mx-auto mb-10">
             <div className="glass-effect rounded-3xl p-8 border border-yellow-400/30 shadow-2xl">
@@ -110,25 +149,19 @@ export default function HeroSection() {
                 <h3 className="text-2xl font-bold text-yellow-300">SCNTSE 2025 — A Glorious Edition</h3>
                 <Star className="h-6 w-6 text-yellow-400 animate-pulse" />
               </div>
-              <p className="text-gray-300 text-lg mb-6">
-                The 2025 edition saw <span className="font-bold text-white">500+ students</span> from across Bengal compete, with the <span className="font-bold text-accent">top 10 candidates each receiving a scholarship of ₹1,00,000</span>.
+              <p className="text-gray-300 text-lg mb-4">
+                The 2025 edition saw <span className="font-bold text-white">500+ students</span> from across Bengal compete, with the <span className="font-bold text-accent">top 10 candidates each receiving a scholarship of ₹1,00,000</span> — a total prize pool of <span className="font-bold text-yellow-300">₹10,00,000</span>.
               </p>
-              <div className="mt-2">
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <Trophy className="h-5 w-5 text-yellow-400" />
-                  <span className="text-lg font-semibold text-yellow-300">SCNTSE 2025 Scholarship Winners</span>
-                </div>
-                <p className="text-sm text-gray-400 italic">
-                  The full list of 2025 results and winners is available in the Results PDF.{" "}
-                  <a
-                    href="/Results.pdf"
-                    download
-                    className="text-accent underline hover:text-white transition-colors"
-                  >
-                    Download Results PDF
-                  </a>
-                </p>
-              </div>
+              <p className="text-sm text-gray-400 italic">
+                The full list of 2025 results and winners is available in the Results PDF.{" "}
+                <a
+                  href="/Results.pdf"
+                  download
+                  className="text-accent underline hover:text-white transition-colors"
+                >
+                  Download Results PDF
+                </a>
+              </p>
             </div>
           </div>
         </div>

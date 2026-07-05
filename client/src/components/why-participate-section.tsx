@@ -1,5 +1,7 @@
-import { Trophy, GraduationCap, Award, Brain, Users, Rocket } from "lucide-react";
+import { Trophy, GraduationCap, Award, Brain, Users, Rocket, ExternalLink } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+
+const REGISTRATION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdzihdCX1Q2RAmM_dOKOtUxuZD5SjoPKL6NzzCY5ntWfovKvg/viewform?usp=publish-editor";
 
 export default function WhyParticipateSection() {
   const reasons = [
@@ -12,7 +14,7 @@ export default function WhyParticipateSection() {
     {
       icon: GraduationCap,
       title: "Scholarship Opportunities",
-      description: "Win a prestigious ₹1,00,000 INR scholarship for top performance in Science & Humanities (Physics, Maths, Chemistry, English).",
+      description: "Win from a ₹10,00,000 prize pool — the top 10 performers each receive a ₹1,00,000 scholarship in Science & Humanities (Physics, Maths, Chemistry, English).",
       gradient: "from-secondary to-primary",
     },
     {
@@ -63,6 +65,22 @@ export default function WhyParticipateSection() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+          {/* Register CTA */}
+          <div className="mt-12 text-center">
+            <a
+              href={REGISTRATION_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-accent via-blue-500 to-secondary text-white font-bold text-xl shadow-2xl border-2 border-accent/50 hover:scale-105 transition-all duration-200 focus:ring-4 focus:ring-accent focus:outline-none"
+            >
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+              Register Now for SCNTSE 2026
+              <ExternalLink className="h-5 w-5" />
+            </a>
+            <p className="text-gray-400 text-sm mt-3">Registration fee: ₹200 (inclusive of all taxes)</p>
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ export default function AboutSection() {
                   <Trophy className="h-6 w-6 text-accent" />
                   <h3 className="text-xl font-semibold text-accent">Rewards</h3>
                 </div>
-                <p className="text-gray-300">Scholarship of ₹1,00,000 INR for top performers & certificates for all qualifiers</p>
+                <p className="text-gray-300">₹10,00,000 total prize pool — top 10 performers each receive ₹1,00,000 scholarship & certificates for all qualifiers</p>
               </div>
             </div>
           </div>

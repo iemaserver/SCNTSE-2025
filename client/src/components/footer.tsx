@@ -82,6 +82,14 @@ export default function Footer() {
                 <a href="#about" className="block text-white/80 hover:text-accent transition-colors text-sm">
                   About SCNTSE
                 </a>
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdzihdCX1Q2RAmM_dOKOtUxuZD5SjoPKL6NzzCY5ntWfovKvg/viewform?usp=publish-editor"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-accent font-semibold hover:text-white transition-colors text-sm"
+                >
+                  ✏️ Register for SCNTSE 2026
+                </a>
                 <a href="#exam-info" className="block text-white/80 hover:text-accent transition-colors text-sm">
                   Exam Information
                 </a>
@@ -142,8 +150,21 @@ export default function Footer() {
                 <div className="flex items-center gap-3 text-white/80">
                   <Award className="h-4 w-4 text-accent" />
                   <div className="text-sm">
-                    <p className="font-semibold">Scholarship</p>
-                    <p>Top performer wins ₹1,00,000 INR</p>
+                    <p className="font-semibold">Prize Pool</p>
+                    <p>₹10,00,000 total — Top 10 win ₹1,00,000 each</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 text-white/80">
+                  <ExternalLink className="h-4 w-4 text-accent" />
+                  <div className="text-sm">
+                    <a
+                      href="https://docs.google.com/forms/d/e/1FAIpQLSdzihdCX1Q2RAmM_dOKOtUxuZD5SjoPKL6NzzCY5ntWfovKvg/viewform?usp=publish-editor"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-accent hover:text-white transition-colors"
+                    >
+                      Register Now →
+                    </a>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,7 @@
-import { FlaskConical, Clock, Target, ArrowRight, BookOpen, Trophy } from "lucide-react";
+import { FlaskConical, Clock, Target, ArrowRight, BookOpen, Trophy, ExternalLink } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+const REGISTRATION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdzihdCX1Q2RAmM_dOKOtUxuZD5SjoPKL6NzzCY5ntWfovKvg/viewform?usp=publish-editor";
 
 export default function ExamInfoSection() {
   return (
@@ -62,9 +64,24 @@ export default function ExamInfoSection() {
               </div>
               <div className="flex items-center gap-3">
                 <Trophy className="h-6 w-6 text-yellow-400" />
-                <span className="text-lg font-semibold text-yellow-300">Scholarship of ₹1,00,000 INR for top performers</span>
+                <span className="text-lg font-semibold text-yellow-300">₹10,00,000 Total Prize Pool — Top 10 students each win ₹1,00,000</span>
               </div>
             </div>
+          </div>
+          {/* Register Button */}
+          <div className="flex justify-center mt-8">
+            <a
+              href={REGISTRATION_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-accent via-blue-500 to-secondary text-white font-bold text-xl shadow-2xl border-2 border-accent/50 hover:scale-105 transition-all duration-200 focus:ring-4 focus:ring-accent focus:outline-none"
+            >
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+              Register Now — ₹200 Only
+              <ExternalLink className="h-5 w-5" />
+            </a>
           </div>
         </div>
       </div>

@@ -29,7 +29,7 @@ export default function FaqSection() {
     },
     {
       question: "What is the scholarship amount for top performers?",
-      answer: "The top performer will receive a scholarship of ₹1,00,000 INR (1 lakh rupees)."
+      answer: "SCNTSE 2026 has a total prize pool of ₹10,00,000. The top 10 performers each receive a scholarship of ₹1,00,000 (1 lakh rupees each)."
     },
     {
       question: "What is the exam pattern?",
@@ -37,7 +37,7 @@ export default function FaqSection() {
     },
     {
       question: "How do I register for SCNTSE?",
-      answer: "Registration will open soon on this website. Please check back regularly for updates and instructions."
+      answer: "Register online via the official Google Form link available on this website. Registration fee is ₹200 (inclusive of all taxes). Click the 'Register Now' button on this page to get started."
     },
     {
       question: "How will I know my exam venue?",
