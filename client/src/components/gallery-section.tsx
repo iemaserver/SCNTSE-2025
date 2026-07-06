@@ -31,9 +31,8 @@ const mediaImages = [
   "/Media/WhatsApp Image 2026-07-05 at 20.28.50.jpeg",
 ];
 
-// Fix 4: no captions — just src
 const mediaVideos = [
-  "/Media/171025_mkt.mp4",
+  "/Media/171025_mkt_h264.mp4",                          // re-encoded to H.264 for browser support
   "/Media/WhatsApp Video 2026-07-05 at 20.20.57.mp4",
   "/Media/WhatsApp Video 2026-07-05 at 20.30.29.mp4",
 ];
@@ -288,8 +287,8 @@ export default function GallerySection() {
                   key={src}
                   className="glass-effect rounded-2xl overflow-hidden border border-white/10 hover:border-accent/40 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-1 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
                 >
-                  {/* Fix 3: portrait aspect so mkt.mp4 shows video not black bar */}
-                  <div className="relative bg-black" style={{ aspectRatio: "9/16" }}>
+                  {/* All videos are landscape — use 16:9 */}
+                  <div className="relative bg-black aspect-video">
                     <video
                       src={src}
                       controls
