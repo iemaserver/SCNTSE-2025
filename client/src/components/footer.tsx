@@ -102,6 +102,9 @@ export default function Footer() {
                 <a href="#winners" className="block text-white/80 hover:text-accent transition-colors text-sm">
                   2025 Winners
                 </a>
+                <a href="#gallery" className="block text-white/80 hover:text-accent transition-colors text-sm">
+                  Photos & Media
+                </a>
                 <a href="#faq" className="block text-white/80 hover:text-accent transition-colors text-sm">
                   FAQs
                 </a>
