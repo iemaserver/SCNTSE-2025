@@ -31,10 +31,11 @@ const mediaImages = [
   "/Media/WhatsApp Image 2026-07-05 at 20.28.50.jpeg",
 ];
 
+// Fix 4: no captions — just src
 const mediaVideos = [
-  { src: "/Media/171025_mkt.mp4",                                label: "SCNTSE 2025 — Highlights" },
-  { src: "/Media/WhatsApp Video 2026-07-05 at 20.20.57.mp4",    label: "SCNTSE 2025 — Ceremony" },
-  { src: "/Media/WhatsApp Video 2026-07-05 at 20.30.29.mp4",    label: "SCNTSE 2025 — Award Presentation" },
+  "/Media/171025_mkt.mp4",
+  "/Media/WhatsApp Video 2026-07-05 at 20.20.57.mp4",
+  "/Media/WhatsApp Video 2026-07-05 at 20.30.29.mp4",
 ];
 
 // ─── Lightbox ─────────────────────────────────────────────────────────────────
@@ -79,7 +80,7 @@ function Lightbox({
         <X className="h-6 w-6" />
       </button>
 
-      {/* Prev arrow */}
+      {/* Prev */}
       <button
         onClick={(e) => { e.stopPropagation(); prev(); }}
         className="absolute left-4 z-10 p-3 rounded-full bg-white/10 hover:bg-white/25 text-white transition-all hover:scale-110"
@@ -120,7 +121,7 @@ function Lightbox({
         </div>
       </div>
 
-      {/* Next arrow */}
+      {/* Next */}
       <button
         onClick={(e) => { e.stopPropagation(); next(); }}
         className="absolute right-4 z-10 p-3 rounded-full bg-white/10 hover:bg-white/25 text-white transition-all hover:scale-110"
@@ -133,13 +134,14 @@ function Lightbox({
 }
 
 // ─── Auto-scrolling Carousel ──────────────────────────────────────────────────
+// Fix 2: portrait prop → taller aspect ratio for media coverage images
 function AutoCarousel({
   images,
-  accentClass = "accent",
+  portrait = false,
   onImageClick,
 }: {
   images: string[];
-  accentClass?: string;
+  portrait?: boolean;
   onImageClick: (i: number) => void;
 }) {
   const trackRef  = useRef<HTMLDivElement>(null);
@@ -147,29 +149,29 @@ function AutoCarousel({
   const posRef    = useRef(0);
   const pausedRef = useRef(false);
 
-  // We duplicate the list for seamless infinite loop
   const doubled = [...images, ...images];
-
-  const SPEED = 0.6; // px per frame
+  const SPEED   = 0.6;
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
-
     const step = () => {
       if (!pausedRef.current) {
         posRef.current += SPEED;
-        // Reset when we've scrolled one full set width
         const halfWidth = track.scrollWidth / 2;
         if (posRef.current >= halfWidth) posRef.current -= halfWidth;
         track.style.transform = `translateX(-${posRef.current}px)`;
       }
       rafRef.current = requestAnimationFrame(step);
     };
-
     rafRef.current = requestAnimationFrame(step);
     return () => cancelAnimationFrame(rafRef.current);
   }, []);
+
+  // Fix 2: portrait cards are narrower + taller so text in images isn't cropped
+  const cardClass = portrait
+    ? "flex-shrink-0 w-44 h-64 md:w-52 md:h-72"   // portrait: ~3:4 ratio
+    : "flex-shrink-0 w-64 h-44 md:w-80 md:h-56";  // landscape: ~16:9 ratio
 
   return (
     <div
@@ -177,9 +179,7 @@ function AutoCarousel({
       onMouseEnter={() => { pausedRef.current = true; }}
       onMouseLeave={() => { pausedRef.current = false; }}
     >
-      {/* Left fade */}
       <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-[#0a0a1a] to-transparent" />
-      {/* Right fade */}
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-[#0a0a1a] to-transparent" />
 
       <div ref={trackRef} className="flex gap-4 w-max will-change-transform">
@@ -187,7 +187,7 @@ function AutoCarousel({
           <button
             key={`${src}-${i}`}
             onClick={() => onImageClick(i % images.length)}
-            className="group relative flex-shrink-0 w-64 h-44 md:w-80 md:h-56 rounded-2xl overflow-hidden border border-white/10 hover:border-accent/60 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-accent/20 focus:outline-none focus:ring-2 focus:ring-accent"
+            className={`group relative ${cardClass} rounded-2xl overflow-hidden border border-white/10 hover:border-accent/60 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-accent/20 focus:outline-none focus:ring-2 focus:ring-accent`}
             aria-label={`View photo ${(i % images.length) + 1}`}
           >
             <img
@@ -197,7 +197,6 @@ function AutoCarousel({
               loading="lazy"
               draggable={false}
             />
-            {/* Hover overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
               <span className="text-white text-xs font-semibold tracking-widest uppercase bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm">
                 Click to enlarge
@@ -214,15 +213,15 @@ function AutoCarousel({
 type Tab = "event" | "media";
 
 export default function GallerySection() {
-  const [tab, setTab]               = useState<Tab>("event");
-  const [lightbox, setLightbox]     = useState<{ images: string[]; idx: number } | null>(null);
+  const [tab, setTab]           = useState<Tab>("event");
+  const [lightbox, setLightbox] = useState<{ images: string[]; idx: number } | null>(null);
 
   const openEvent = useCallback((i: number) => setLightbox({ images: eventImages, idx: i }), []);
   const openMedia = useCallback((i: number) => setLightbox({ images: mediaImages, idx: i }), []);
 
   return (
     <section id="gallery" className="py-24 overflow-hidden">
-      {/* ── Header ── */}
+      {/* Header */}
       <div className="container mx-auto px-4 text-center mb-14">
         <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-3">
           Photos &amp; Media Coverage
@@ -232,7 +231,7 @@ export default function GallerySection() {
         </p>
       </div>
 
-      {/* ── Tab switcher ── */}
+      {/* Tab switcher */}
       <div className="flex justify-center mb-12 px-4">
         <div className="glass-effect rounded-2xl p-1 flex gap-1 shadow-xl">
           <button
@@ -262,55 +261,42 @@ export default function GallerySection() {
         </div>
       </div>
 
-      {/* ── Event Photos carousel ── */}
+      {/* Fix 1: single carousel row for event photos */}
       {tab === "event" && (
-        <div className="space-y-3">
-          {/* Row 1 — scrolls left */}
-          <AutoCarousel images={eventImages} onImageClick={openEvent} />
-          {/* Row 2 — same images offset, also scrolls (gives depth) */}
-          <AutoCarousel
-            images={[...eventImages.slice(6), ...eventImages.slice(0, 6)]}
-            onImageClick={(i) => openEvent((i + 6) % eventImages.length)}
-          />
-        </div>
+        <AutoCarousel images={eventImages} onImageClick={openEvent} />
       )}
 
-      {/* ── Media Coverage ── */}
+      {/* Media Coverage */}
       {tab === "media" && (
         <div className="space-y-12">
-          {/* Press images carousel */}
+          {/* Fix 2: portrait carousel for press images */}
           <div>
             <p className="text-center text-sm font-semibold text-white/40 uppercase tracking-widest mb-5">
               Press &amp; News Coverage
             </p>
-            <AutoCarousel images={mediaImages} onImageClick={openMedia} />
+            <AutoCarousel images={mediaImages} portrait onImageClick={openMedia} />
           </div>
 
-          {/* Videos */}
+          {/* Fix 3 & 4: videos without captions, portrait aspect */}
           <div className="container mx-auto px-4">
             <p className="text-center text-sm font-semibold text-white/40 uppercase tracking-widest mb-7">
               Video Coverage
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {mediaVideos.map(({ src, label }) => (
+            <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
+              {mediaVideos.map((src) => (
                 <div
                   key={src}
-                  className="group glass-effect rounded-2xl overflow-hidden border border-white/10 hover:border-accent/40 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-1"
+                  className="glass-effect rounded-2xl overflow-hidden border border-white/10 hover:border-accent/40 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/10 hover:-translate-y-1 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
                 >
-                  <div className="relative aspect-video bg-black">
+                  {/* Fix 3: portrait aspect so mkt.mp4 shows video not black bar */}
+                  <div className="relative bg-black" style={{ aspectRatio: "9/16" }}>
                     <video
                       src={src}
                       controls
                       preload="metadata"
-                      className="w-full h-full object-cover"
-                      aria-label={label}
+                      playsInline
+                      className="w-full h-full object-contain"
                     />
-                  </div>
-                  <div className="px-4 py-3 flex items-center gap-2">
-                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-accent/20 flex items-center justify-center">
-                      <Play className="h-3.5 w-3.5 text-accent fill-accent" />
-                    </div>
-                    <p className="text-sm font-semibold text-white/80 leading-tight">{label}</p>
                   </div>
                 </div>
               ))}
@@ -319,7 +305,7 @@ export default function GallerySection() {
         </div>
       )}
 
-      {/* ── Lightbox ── */}
+      {/* Lightbox */}
       {lightbox && (
         <Lightbox
           images={lightbox.images}
@@ -328,7 +314,6 @@ export default function GallerySection() {
         />
       )}
 
-      {/* Fade-in keyframe */}
       <style>{`
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
       `}</style>
