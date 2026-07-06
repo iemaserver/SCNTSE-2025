@@ -18,11 +18,11 @@ export default function Home() {
         <Navigation />
         <HeroSection />
         <AboutSection />
+        <WinnersSection />
+        <GallerySection />
         <ExamInfoSection />
         <VenuesSection />
         <WhyParticipateSection />
-        <WinnersSection />
-        <GallerySection />
         <FaqSection />
         <Footer />
       </div>

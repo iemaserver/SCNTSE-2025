@@ -9,11 +9,11 @@ export default function Navigation() {
 
   const navItems = [
     { href: "#about", label: "About" },
+    { href: "#winners", label: "2025 Winners" },
+    { href: "#gallery", label: "Gallery" },
     { href: "#exam-info", label: "Exam Info" },
     { href: "#venues", label: "Venues" },
     { href: "#why-participate", label: "Why Participate" },
-    { href: "#winners", label: "2025 Winners" },
-    { href: "#gallery", label: "Gallery" },
   ];
 
   const handleNavClick = (href: string) => {
