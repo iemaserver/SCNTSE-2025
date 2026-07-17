@@ -1,0 +1,14 @@
+# robots.txt — https://scntse.iem.edu.in
+
+User-agent: *
+Allow: /
+
+Sitemap: https://scntse.iem.edu.in/sitemap.xml
+
+Disallow: /api/
+Disallow: /node_modules/
+
+Allow: /sitemap.xml
+Allow: /Results.pdf
+Allow: /Winners.jpeg
+Allow: /google3f053d352e7b5b3b.html
