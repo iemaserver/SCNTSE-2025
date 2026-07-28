@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Link, useLocation } from "wouter";
 import IEM from "@assets/logo.png";
 import UEM from "@assets/image_1752080086077.png";
+
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [location] = useLocation();
 
   const navItems = [
     { href: "#about", label: "About" },
@@ -18,6 +21,10 @@ export default function Navigation() {
 
   const handleNavClick = (href: string) => {
     setIsOpen(false);
+    if (location !== "/") {
+      window.location.href = "/" + href;
+      return;
+    }
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -50,33 +57,27 @@ export default function Navigation() {
               <div className="w-px h-8 bg-white/30"></div>
             </div>
 
-            <div className="relative group">
-              {/* Glowing background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-accent via-primary to-secondary rounded-xl blur-md opacity-75 group-hover:opacity-100 transition-opacity"></div>
+            <Link href="/">
+              <div className="flex items-center space-x-3 cursor-pointer group">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-accent via-primary to-secondary rounded-xl blur-md opacity-75 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="relative w-15 h-12 bg-gradient-to-br from-accent to-primary rounded-xl flex items-center justify-center border border-white/20 shadow-lg transform transition-all duration-300 group-hover:scale-105 px-2">
+                    <span className="text-sm font-bold text-white drop-shadow-lg">
+                      SCNTSE
+                    </span>
+                  </div>
+                </div>
 
-              {/* Logo container */}
-              <div className="relative w-15 h-12 bg-gradient-to-br from-accent to-primary rounded-xl flex items-center justify-center border border-white/20 shadow-lg transform transition-all duration-300 hover:scale-110">
-                <span className="text-sm font-bold text-white drop-shadow-lg">
-                  SCNTSE
-                </span>
-
-                {/* Corner accents */}
-                <div className="absolute top-1 right-1 w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse"></div>
-                <div className="absolute bottom-1 left-1 w-1.5 h-1.5 bg-white/40 rounded-full animate-pulse delay-500"></div>
+                <div className="relative">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-accent via-white to-secondary bg-clip-text text-transparent drop-shadow-lg">
+                    SCNTSE 2026
+                  </span>
+                </div>
               </div>
-            </div>
-
-            <div className="relative">
-              <span className="text-2xl font-bold bg-gradient-to-r from-accent via-white to-secondary bg-clip-text text-transparent drop-shadow-lg">
-                SCNTSE 2026
-              </span>
-
-              {/* Underline animation */}
-              <div className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-accent to-secondary transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
-            </div>
+            </Link>
           </div>
 
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.href}
@@ -86,6 +87,11 @@ export default function Navigation() {
                 {item.label}
               </button>
             ))}
+            <Link href="/admit">
+              <Button className="bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold hover:from-amber-600 hover:to-yellow-600 shadow-md">
+                Admit Card
+              </Button>
+            </Link>
           </div>
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -112,6 +118,11 @@ export default function Navigation() {
                     {item.label}
                   </button>
                 ))}
+                <Link href="/admit" onClick={() => setIsOpen(false)}>
+                  <Button className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold">
+                    Download Admit Card
+                  </Button>
+                </Link>
               </div>
             </SheetContent>
           </Sheet>
