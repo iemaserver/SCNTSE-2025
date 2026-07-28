@@ -47,18 +47,18 @@ export default function AdmitCardPage() {
       });
       const data = await res.json().catch(() => ({}));
 
-      if (res.ok && data.success) {
+      if (data && data.success) {
         setCandidate({
           name: data.name,
           hall_ticket: data.hall_ticket,
           downloadToken: data.downloadToken,
         });
       } else {
-        setError(data.message || `Error ${res.status}: Invalid Email ID or Aadhar Number.`);
+        setError(data?.message || "Invalid Email ID or Aadhar Number. Please check your details and try again.");
       }
     } catch (err: any) {
       console.error("Admit card request error:", err);
-      setError("Unable to connect to server. Please check your network or server status and try again.");
+      setError("Unable to connect to server. Please check your connection and try again.");
     } finally {
       setLoading(false);
     }

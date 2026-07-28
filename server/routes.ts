@@ -39,18 +39,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const aadharClean = aadharInput.replace(/[^\d]/g, "");
 
       if (!emailInput || !aadharClean) {
-        return res.status(400).json({ message: "Please enter both registered Email Address and Aadhar Number." });
+        return res.status(400).json({ success: false, message: "Please enter both registered Email Address and Aadhar Number." });
       }
 
       if (!fs.existsSync(excelPath)) {
-        return res.status(500).json({ message: "Candidate data file unavailable." });
+        return res.status(500).json({ success: false, message: "Candidate data file unavailable." });
       }
 
       // Read Excel file directly in memory
       const workbook = XLSX.readFile(excelPath);
       const sheet = workbook.Sheets["Sheet1"];
       if (!sheet) {
-        return res.status(500).json({ message: "Sheet1 data not found in Excel file." });
+        return res.status(500).json({ success: false, message: "Sheet1 data not found in Excel file." });
       }
 
       const rows: any[] = XLSX.utils.sheet_to_json(sheet);
@@ -62,7 +62,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const e2 = (row["Email"] || "").toString().trim().toLowerCase();
 
         let rowAadharRaw = (row["Aadhar Number"] || "").toString().trim();
-        if (rowAadharRaw.endswith(".0")) {
+        if (rowAadharRaw.endsWith(".0")) {
           rowAadharRaw = rowAadharRaw.slice(0, -2);
         }
         const rowAadharClean = rowAadharRaw.replace(/[^\d]/g, "");
@@ -82,13 +82,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       if (!matchedCandidate) {
         return res.status(401).json({
+          success: false,
           message: "No candidate found matching the provided Email ID and Aadhar Number. Please check your credentials and try again."
         });
       }
 
       const pdfFilePath = getPdfPath(matchedCandidate.aadhar_clean);
       if (!pdfFilePath) {
-        return res.status(404).json({ message: "Admit card PDF file not found on server." });
+        return res.status(404).json({ success: false, message: "Admit card PDF file not found on server." });
       }
 
       // Generate a secure one-time download token (expires in 15 minutes)
@@ -106,7 +107,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (err: any) {
       console.error("Error in /api/admit:", err);
-      return res.status(500).json({ message: err?.message || "Server error processing admit card request." });
+      return res.status(500).json({ success: false, message: err?.message || "Server error processing admit card request." });
     }
   });
 
