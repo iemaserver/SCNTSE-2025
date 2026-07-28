@@ -8,7 +8,16 @@ import { Link } from "wouter";
 interface CandidateResult {
   name: string;
   hall_ticket: string;
-  downloadToken: string;
+  pdfUrl: string;
+}
+
+// Compute SHA-256 hash in browser
+async function sha256Hash(text: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
 export default function AdmitCardPage() {
@@ -24,8 +33,9 @@ export default function AdmitCardPage() {
     setCandidate(null);
     setLoading(true);
 
-    const inputEmail = email.trim();
-    const inputAadhar = aadhar.trim();
+    const inputEmail = email.trim().toLowerCase();
+    const inputAadharRaw = aadhar.trim();
+    const inputAadharClean = inputAadharRaw.replace(/[^\d]/g, "");
 
     if (!inputEmail) {
       setError("Please enter your registered Email ID.");
@@ -33,35 +43,59 @@ export default function AdmitCardPage() {
       return;
     }
 
-    if (!inputAadhar) {
-      setError("Please enter your Aadhar Number.");
+    if (!inputAadharClean) {
+      setError("Please enter your 12-digit Aadhar Card Number.");
       setLoading(false);
       return;
     }
 
+    // 1. Try server API route first
     try {
       const res = await fetch("/api/admit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: inputEmail, aadhar: inputAadhar }),
+        body: JSON.stringify({ email: inputEmail, aadhar: inputAadharClean }),
       });
-      const data = await res.json().catch(() => ({}));
 
-      if (data && data.success) {
-        setCandidate({
-          name: data.name,
-          hall_ticket: data.hall_ticket,
-          downloadToken: data.downloadToken,
-        });
-      } else {
-        setError(data?.message || "Invalid Email ID or Aadhar Number. Please check your details and try again.");
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.success) {
+          setCandidate({
+            name: data.name,
+            hall_ticket: data.hall_ticket,
+            pdfUrl: `/api/download-admit?token=${data.downloadToken}`,
+          });
+          setLoading(false);
+          return;
+        }
       }
-    } catch (err: any) {
-      console.error("Admit card request error:", err);
-      setError("Unable to connect to server. Please check your connection and try again.");
-    } finally {
-      setLoading(false);
+    } catch {
+      // Ignore network / static hosting error and try static SHA-256 fallback
     }
+
+    // 2. Production Static Fallback (Firebase / GitHub Actions static build)
+    try {
+      const hashKey = await sha256Hash(`${inputEmail}:${inputAadharClean}`);
+      const dbRes = await fetch("/admit-db.json");
+      if (dbRes.ok) {
+        const dbData = await dbRes.json();
+        const matched = dbData[hashKey];
+        if (matched) {
+          setCandidate({
+            name: matched.name,
+            hall_ticket: matched.ht,
+            pdfUrl: matched.pdf || `/admit/${matched.aadhar}.pdf`,
+          });
+          setLoading(false);
+          return;
+        }
+      }
+    } catch (err) {
+      console.error("Static lookup error:", err);
+    }
+
+    setError("No candidate found matching the provided Email ID and Aadhar Number. Please check your credentials and try again.");
+    setLoading(false);
   };
 
   return (
@@ -106,7 +140,7 @@ export default function AdmitCardPage() {
 
                 <div className="pt-2 space-y-3">
                   <a
-                    href={`/api/download-admit?token=${candidate.downloadToken}`}
+                    href={candidate.pdfUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full"
