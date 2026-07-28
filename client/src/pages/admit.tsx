@@ -45,7 +45,7 @@ export default function AdmitCardPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: inputEmail, aadhar: inputAadhar }),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
       if (res.ok && data.success) {
         setCandidate({
@@ -54,10 +54,11 @@ export default function AdmitCardPage() {
           downloadToken: data.downloadToken,
         });
       } else {
-        setError(data.message || "Invalid Email ID or Aadhar Number.");
+        setError(data.message || `Error ${res.status}: Invalid Email ID or Aadhar Number.`);
       }
-    } catch {
-      setError("Network connection error. Please try again.");
+    } catch (err: any) {
+      console.error("Admit card request error:", err);
+      setError("Unable to connect to server. Please check your network or server status and try again.");
     } finally {
       setLoading(false);
     }

@@ -2,9 +2,12 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import path from "path";
 import fs from "fs";
-import XLSX from "xlsx";
 import crypto from "crypto";
 import { fileURLToPath } from "url";
+import { createRequire } from "module";
+
+const require = createRequire(import.meta.url);
+const XLSX = require("xlsx");
 
 // Token memory store for secure download links
 const downloadTokens = new Map<string, { pdfPath: string; expires: number }>();
@@ -30,27 +33,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Secure API endpoint: Validate strictly from _SCNTSE 2026 (Responses).xlsx Sheet1
   app.post("/api/admit", async (req: Request, res: Response) => {
-    // 500ms delay to prevent timing attacks / email enumeration
-    await new Promise((r) => setTimeout(r, 400));
-
-    const emailInput = (req.body.email || "").toString().trim().toLowerCase();
-    const aadharInput = (req.body.aadhar || req.body.aadharNumber || "").toString().trim();
-    const aadharClean = aadharInput.replace(/[^\d]/g, "");
-
-    if (!emailInput || !aadharClean) {
-      return res.status(400).json({ message: "Please enter both registered Email Address and Aadhar Number." });
-    }
-
-    if (!fs.existsSync(excelPath)) {
-      return res.status(500).json({ message: "Candidate data file unavailable." });
-    }
-
     try {
+      const emailInput = (req.body.email || "").toString().trim().toLowerCase();
+      const aadharInput = (req.body.aadhar || req.body.aadharNumber || "").toString().trim();
+      const aadharClean = aadharInput.replace(/[^\d]/g, "");
+
+      if (!emailInput || !aadharClean) {
+        return res.status(400).json({ message: "Please enter both registered Email Address and Aadhar Number." });
+      }
+
+      if (!fs.existsSync(excelPath)) {
+        return res.status(500).json({ message: "Candidate data file unavailable." });
+      }
+
       // Read Excel file directly in memory
       const workbook = XLSX.readFile(excelPath);
       const sheet = workbook.Sheets["Sheet1"];
       if (!sheet) {
-        return res.status(500).json({ message: "Sheet1 data not found." });
+        return res.status(500).json({ message: "Sheet1 data not found in Excel file." });
       }
 
       const rows: any[] = XLSX.utils.sheet_to_json(sheet);
@@ -62,7 +62,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const e2 = (row["Email"] || "").toString().trim().toLowerCase();
 
         let rowAadharRaw = (row["Aadhar Number"] || "").toString().trim();
-        if (rowAadharRaw.endsWith(".0")) {
+        if (rowAadharRaw.endswith(".0")) {
           rowAadharRaw = rowAadharRaw.slice(0, -2);
         }
         const rowAadharClean = rowAadharRaw.replace(/[^\d]/g, "");
@@ -82,7 +82,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       if (!matchedCandidate) {
         return res.status(401).json({
-          message: "No candidate found matching the provided Email ID and Aadhar Number. Please check your credentials."
+          message: "No candidate found matching the provided Email ID and Aadhar Number. Please check your credentials and try again."
         });
       }
 
@@ -104,9 +104,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         hall_ticket: matchedCandidate.hall_ticket,
         downloadToken: token
       });
-    } catch (err) {
-      console.error("Error reading Excel data:", err);
-      return res.status(500).json({ message: "Server error reading candidate database." });
+    } catch (err: any) {
+      console.error("Error in /api/admit:", err);
+      return res.status(500).json({ message: err?.message || "Server error processing admit card request." });
     }
   });
 
