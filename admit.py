@@ -1,22 +1,26 @@
 """
-SCNTSE Admit Card Generator v5
+SCNTSE Admit Card Generator v6
 Reads candidate data from Sheet1 of _SCNTSE 2026 (Responses).xlsx.
 Automatically deduplicates student entries by Aadhar Number (keeping the first submission).
-Auto-downloads photos concurrently using ThreadPoolExecutor.
+Auto-downloads candidate photos robustly using ThreadPoolExecutor with Session pooling & multi-endpoint fallbacks.
 Generates admit card PDFs named <aadhar_number>.pdf in admit/ folder.
-Updates Sheet1 of _SCNTSE 2026 (Responses).xlsx with a new column 'Hall ticket number'.
+Updates Sheet1 of _SCNTSE 2026 (Responses).xlsx with candidate Hall ticket numbers.
 """
 
 import os
 import re
+import io
+import time
 import pandas as pd
 import requests
-from PIL import Image
+from PIL import Image, ImageFile
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas
 from reportlab.lib.colors import HexColor
 from concurrent.futures import ThreadPoolExecutor
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 try:
     import gdown
@@ -43,7 +47,6 @@ RED = HexColor("#D93025")
 GREY = HexColor("#333333")
 
 # Venue details mapping: (name, address, maps_link, center_code)
-# IEM Management House, IEM Gurukul, IEM Ashram -> IEM Management House (Center Code: 02)
 VENUE_MANAGEMENT = (
     "IEM Management House",
     "IEM Management Building, D-1, Street No. 13, EP Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091",
@@ -51,7 +54,6 @@ VENUE_MANAGEMENT = (
     "02"
 )
 
-# IEM Newtown -> IEM Newtown (Center Code: 04)
 VENUE_NEWTOWN = (
     "IEM Newtown",
     "University Area, Plot No. III-B/5, New Town, Action Area III, Kolkata, West Bengal 700156",
@@ -93,6 +95,27 @@ def extract_drive_id(url):
         return m.group(1)
     return None
 
+# Global requests session with connection pooling
+session = requests.Session()
+adapter = requests.adapters.HTTPAdapter(pool_connections=20, pool_maxsize=20)
+session.mount("https://", adapter)
+HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+
+def save_image_robust(content, dest_path):
+    """Converts downloaded raw bytes (PNG, WEBP, JPEG, RGBA) cleanly into RGB JPEG format."""
+    img = Image.open(io.BytesIO(content))
+    img.load()
+    if img.mode in ("RGBA", "LA", "P"):
+        bg = Image.new("RGB", img.size, (255, 255, 255))
+        if img.mode == "RGBA":
+            bg.paste(img, mask=img.split()[3])
+        else:
+            bg.paste(img)
+        img = bg
+    else:
+        img = img.convert("RGB")
+    img.save(dest_path, "JPEG", quality=92)
+
 def download_photo_single(args):
     url, aadhar_key = args
     if not url or pd.isna(url):
@@ -101,33 +124,30 @@ def download_photo_single(args):
     file_base = safe_filename(aadhar_key) if aadhar_key else "unknown"
     dest = os.path.join(PHOTO_DIR, f"{file_base}.jpg")
     
-    if os.path.exists(dest) and os.path.getsize(dest) > 0:
-        return dest
+    # Check existing photo validity
+    if os.path.exists(dest) and os.path.getsize(dest) > 1000:
+        try:
+            with Image.open(dest) as img:
+                img.verify()
+            return dest
+        except Exception:
+            pass
 
     file_id = extract_drive_id(url)
     if not file_id:
         return None
 
-    # Try fast LH3 direct endpoint
-    try:
-        lh3_url = f"https://lh3.googleusercontent.com/d/{file_id}"
-        resp = requests.get(lh3_url, timeout=10)
-        if resp.status_code == 200 and len(resp.content) > 1000:
-            with open(dest, "wb") as f:
-                f.write(resp.content)
-            img = Image.open(dest).convert("RGB")
-            img.save(dest, quality=92)
-            return dest
-    except Exception:
-        pass
+    urls_to_try = [
+        f"https://drive.google.com/uc?export=view&id={file_id}",
+        f"https://lh3.googleusercontent.com/d/{file_id}",
+        f"https://drive.google.com/uc?export=download&id={file_id}"
+    ]
 
-    # Fallback to gdown
-    if HAS_GDOWN:
+    for target_url in urls_to_try:
         try:
-            gdown.download(url=f"https://drive.google.com/uc?id={file_id}", output=dest, quiet=True)
-            if os.path.exists(dest) and os.path.getsize(dest) > 0:
-                img = Image.open(dest).convert("RGB")
-                img.save(dest, quality=92)
+            resp = session.get(target_url, headers=HEADERS, timeout=12, allow_redirects=True)
+            if resp.status_code == 200 and len(resp.content) > 1000 and b"<!DOCTYPE html>" not in resp.content[:200]:
+                save_image_robust(resp.content, dest)
                 return dest
         except Exception:
             pass
@@ -262,7 +282,7 @@ def draw_card(c, row, hall_ticket_no, page_w, page_h, photo_path):
     y_cursor -= 6 * mm
     c.setFont("Helvetica", 9.5)
     c.setFillColor(GREY)
-    c.drawString(box_left + 4 * mm, y_cursor, "Date: To be announced")
+    c.drawString(box_left + 4 * mm, y_cursor, "Date: 1st August 2026")
     y_cursor -= 5 * mm
     c.drawString(box_left + 4 * mm, y_cursor, "Reporting Time: 10:00 AM (Exam: 11:00 AM - 1:00 PM)")
     y_cursor -= 7 * mm
@@ -362,24 +382,36 @@ def draw_card(c, row, hall_ticket_no, page_w, page_h, photo_path):
 
 
 def generate_hall_ticket_numbers(df):
-    """
-    Generate Hall ticket numbers for each student:
-    - IEM Management House, Gurukul, Ashram group: 2602001, 2602002...
-    - IEM Newtown group: 2604500, 2604501...
-    """
+    """Generate Hall ticket numbers for candidates missing them."""
     mgmt_counter = 2602001
     newtown_counter = 2604500
-    hall_tickets = []
+    
+    # Track existing numbers to avoid collisions
+    existing = set(df["Hall ticket number"].dropna().astype(int).tolist()) if "Hall ticket number" in df.columns else set()
+    while mgmt_counter in existing:
+        mgmt_counter += 1
+    while newtown_counter in existing:
+        newtown_counter += 1
 
+    hall_tickets = []
     for idx, row in df.iterrows():
-        raw_v = row.get(VENUE_COL, "")
-        name, _, _, _ = resolve_venue(raw_v)
-        if name == "IEM Newtown":
-            hall_tickets.append(newtown_counter)
-            newtown_counter += 1
+        if "Hall ticket number" in df.columns and pd.notna(row["Hall ticket number"]) and str(row["Hall ticket number"]).strip():
+            hall_tickets.append(int(row["Hall ticket number"]))
         else:
-            hall_tickets.append(mgmt_counter)
-            mgmt_counter += 1
+            raw_v = row.get(VENUE_COL, "")
+            name, _, _, _ = resolve_venue(raw_v)
+            if name == "IEM Newtown":
+                while newtown_counter in existing:
+                    newtown_counter += 1
+                hall_tickets.append(newtown_counter)
+                existing.add(newtown_counter)
+                newtown_counter += 1
+            else:
+                while mgmt_counter in existing:
+                    mgmt_counter += 1
+                hall_tickets.append(mgmt_counter)
+                existing.add(mgmt_counter)
+                mgmt_counter += 1
 
     return hall_tickets
 
@@ -412,15 +444,13 @@ def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     os.makedirs(PHOTO_DIR, exist_ok=True)
 
-    # Generate Hall ticket numbers according to venue rules
-    if "Hall ticket number" not in df.columns:
-        hall_tickets = generate_hall_ticket_numbers(df)
-        df["Hall ticket number"] = hall_tickets
+    # Generate or preserve Hall ticket numbers
+    df["Hall ticket number"] = generate_hall_ticket_numbers(df)
 
     # Save deduplicated rows back to Excel
     update_excel_with_hall_tickets(XLSX_PATH, df)
 
-    # Fast parallel download of candidate photos
+    # Fast parallel download of candidate photos using max 6 workers to prevent rate limits
     download_tasks = []
     for idx, row in df.iterrows():
         raw_a = clean_aadhar(row.get(AADHAR_COL, ""))
@@ -428,12 +458,11 @@ def main():
             raw_a = f"unknown_{idx+1}"
         download_tasks.append((row.get(PHOTO_COL), raw_a))
 
-    print(f"Downloading {len(download_tasks)} candidate photos concurrently...")
-    with ThreadPoolExecutor(max_workers=20) as executor:
+    print(f"Downloading {len(download_tasks)} candidate photos concurrently (max 6 workers)...")
+    with ThreadPoolExecutor(max_workers=6) as executor:
         list(tqdm(executor.map(download_photo_single, download_tasks), total=len(download_tasks), desc="Downloading photos", unit="photo"))
 
     pbar = tqdm(df.iterrows(), total=len(df), desc="Generating admit cards", unit="card")
-
     page_w, page_h = A4
 
     for idx, row in pbar:
@@ -443,13 +472,12 @@ def main():
         if not aadhar_clean:
             aadhar_clean = f"unknown_{idx+1}"
 
-        hall_ticket_no = row["Hall ticket number"]
-
+        hall_ticket_no = int(row["Hall ticket number"])
         name = row.get("Name", "")
         pbar.set_postfix_str(f"{str(name)[:15]} ({aadhar_clean})")
 
         photo_path = os.path.join(PHOTO_DIR, f"{safe_filename(aadhar_clean)}.jpg")
-        if not os.path.exists(photo_path) or os.path.getsize(photo_path) == 0:
+        if not os.path.exists(photo_path) or os.path.getsize(photo_path) < 1000:
             photo_path = None
 
         out_pdf_path = os.path.join(OUT_DIR, f"{aadhar_clean}.pdf")
