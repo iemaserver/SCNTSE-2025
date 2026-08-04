@@ -1,10 +1,34 @@
-import { Trophy, Star, Download } from "lucide-react";
+import { Trophy, Star, Download, CheckCircle } from "lucide-react";
 
 export default function WinnersSection() {
   return (
     <section id="winners" className="py-20 bg-white/5 backdrop-blur-sm">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
+
+          {/* SCNTSE 2026 Round 1 Results */}
+          <div className="mb-12 rounded-3xl p-8 border-2 border-green-400/50 shadow-2xl bg-gradient-to-br from-green-900/40 via-emerald-900/40 to-teal-900/40 backdrop-blur-sm">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <CheckCircle className="h-7 w-7 text-green-400" />
+              <h2 className="text-3xl md:text-4xl font-bold text-green-300">
+                SCNTSE 2026 — Round 1 Results
+              </h2>
+              <CheckCircle className="h-7 w-7 text-green-400" />
+            </div>
+            <p className="text-gray-300 text-lg mb-6">
+              Round 1 (MCQ) results are officially out. Download the PDF to check your name and qualification status for Round 2.
+            </p>
+            <a
+              href="/Results_2026.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 text-white font-bold text-xl shadow-xl border-2 border-green-300/50 hover:scale-105 transition-all duration-200 focus:ring-4 focus:ring-green-400 focus:outline-none"
+            >
+              <Download className="h-6 w-6" />
+              Download Round 1 Results — SCNTSE 2026
+            </a>
+          </div>
+
           <div className="flex items-center justify-center gap-3 mb-4">
             <Star className="h-7 w-7 text-yellow-400 animate-pulse" />
             <h2 className="text-4xl md:text-5xl font-bold text-yellow-300">

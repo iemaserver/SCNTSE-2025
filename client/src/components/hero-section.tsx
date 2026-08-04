@@ -1,4 +1,4 @@
-import { Calendar, Users, BookOpen, ChevronDown, Award, IndianRupee, Trophy, Star, ExternalLink } from "lucide-react";
+import { Calendar, Users, BookOpen, ChevronDown, Award, IndianRupee, Trophy, Star, ExternalLink, Download } from "lucide-react";
 import professorImage from "@assets/images.jpeg";
 import CountdownTimer from "@/components/countdown-timer";
 
@@ -139,6 +139,29 @@ export default function HeroSection() {
               <ExternalLink className="h-4 w-4" />
               Click here to register — Registration Fee: ₹200 only
             </a>
+          </div>
+
+          {/* SCNTSE 2026 Round 1 Results Banner */}
+          <div className="max-w-3xl mx-auto mb-6">
+            <div className="rounded-3xl p-6 border-2 border-green-400/60 shadow-2xl bg-gradient-to-r from-green-900/60 via-emerald-900/60 to-teal-900/60 backdrop-blur-sm">
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <Trophy className="h-6 w-6 text-green-400 animate-bounce" />
+                <h3 className="text-2xl font-bold text-green-300">SCNTSE 2026 — Round 1 Results Out!</h3>
+                <Trophy className="h-6 w-6 text-green-400 animate-bounce" />
+              </div>
+              <p className="text-gray-300 text-base mb-4">
+                The results of <span className="font-bold text-white">Round 1 (MCQ)</span> of SCNTSE 2026 have been announced. Check the official results PDF to see if you've qualified for Round 2.
+              </p>
+              <a
+                href="/Results_2026.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-gradient-to-r from-green-500 to-teal-500 text-white font-bold text-lg shadow-lg border border-green-300/50 hover:scale-105 transition-all duration-200 focus:ring-4 focus:ring-green-400 focus:outline-none"
+              >
+                <Download className="h-5 w-5" />
+                View Round 1 Results — SCNTSE 2026
+              </a>
+            </div>
           </div>
 
           {/* SCNTSE 2025 Legacy Banner */}
