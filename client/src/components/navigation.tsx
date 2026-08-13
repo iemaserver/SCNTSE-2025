@@ -87,11 +87,6 @@ export default function Navigation() {
                 {item.label}
               </button>
             ))}
-            <Link href="/admit">
-              <Button className="bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold hover:from-amber-600 hover:to-yellow-600 shadow-md">
-                Admit Card
-              </Button>
-            </Link>
           </div>
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -118,11 +113,6 @@ export default function Navigation() {
                     {item.label}
                   </button>
                 ))}
-                <Link href="/admit" onClick={() => setIsOpen(false)}>
-                  <Button className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold">
-                    Download Admit Card
-                  </Button>
-                </Link>
               </div>
             </SheetContent>
           </Sheet>

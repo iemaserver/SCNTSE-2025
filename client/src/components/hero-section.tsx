@@ -164,6 +164,29 @@ export default function HeroSection() {
             </div>
           </div>
 
+          {/* SCNTSE 2026 Round 2 Results Banner */}
+          <div className="max-w-3xl mx-auto mb-6">
+            <div className="rounded-3xl p-6 border-2 border-blue-400/60 shadow-2xl bg-gradient-to-r from-blue-900/60 via-indigo-900/60 to-violet-900/60 backdrop-blur-sm">
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <Trophy className="h-6 w-6 text-blue-400 animate-bounce" />
+                <h3 className="text-2xl font-bold text-blue-300">SCNTSE 2026 — Round 2 Results Out!</h3>
+                <Trophy className="h-6 w-6 text-blue-400 animate-bounce" />
+              </div>
+              <p className="text-gray-300 text-base mb-4">
+                The results of <span className="font-bold text-white">Round 2 (Descriptive)</span> of SCNTSE 2026 have been announced. Check the official results PDF to see if you've qualified for Round 3.
+              </p>
+              <a
+                href="/Result2.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-violet-500 text-white font-bold text-lg shadow-lg border border-blue-300/50 hover:scale-105 transition-all duration-200 focus:ring-4 focus:ring-blue-400 focus:outline-none"
+              >
+                <Download className="h-5 w-5" />
+                View Round 2 Results — SCNTSE 2026
+              </a>
+            </div>
+          </div>
+
           {/* SCNTSE 2025 Legacy Banner */}
           <div className="max-w-3xl mx-auto mb-10">
             <div className="glass-effect rounded-3xl p-8 border border-yellow-400/30 shadow-2xl">
